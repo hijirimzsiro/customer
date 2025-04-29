@@ -1,0 +1,119 @@
+/* 點餐頁 - orderPage.css */
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin: 30px auto;
+  }
+  
+  .menu-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 480px;
+    border: 1px solid #d8bfa2;
+    background-color: #fff8e7;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  .menu-card img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    margin-right: 12px;
+  }
+  
+  .menu-card .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .menu-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 4px;
+    color: #333;
+  }
+  
+  .menu-card p {
+    margin: 0;
+    color: #e76f51;
+    font-weight: bold;
+  }
+  
+  .menu-card .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* 數量元件樣式 */
+  .quantity-input {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    background: white;
+  }
+  
+  .quantity-input .btn {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    background: #f0f0f0;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .quantity-input input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    font-size: 16px;
+    height: 36px;
+    outline: none;
+  }
+  
+  .cart-btn {
+    background-color: #f4a261;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  /* 下方按鈕 */
+  .next-btn {
+    margin-top: 30px;
+    background-color: #f4a261;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+/* 去掉 input 數字箭頭 */
+.quantity-input input::-webkit-outer-spin-button,
+.quantity-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity-input input[type=number] {
+  -moz-appearance: textfield;
+}
+  

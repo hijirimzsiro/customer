@@ -1,0 +1,90 @@
+/* 購物車頁 - cartPage.css */
+
+.cart-list {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #d8bfa2;
+    margin-bottom: 20px;
+  }
+  
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+    font-size: 16px;
+  }
+  
+  .cart-item span {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .total-amount {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e76f51;
+    margin: 20px 0;
+    text-align: right;
+  }
+  
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+  }
+  
+  .btn-group button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 12px;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-group button:first-child {
+    background-color: #999;
+  }
+  
+  .btn-group button:last-child {
+    background-color: #e76f51;
+  }
+  
+  /* 數量元件樣式 */
+  .quantity-input {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    background: white;
+  }
+  
+  .quantity-input .btn {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    background: #f0f0f0;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .quantity-input input {
+    width: 60px;
+    text-align: center;
+    border: none;
+    font-size: 16px;
+    height: 36px;
+    outline: none;
+  }
+  

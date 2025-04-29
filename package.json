@@ -1,0 +1,11 @@
+{
+  "name": "customer-order-app",
+  "version": "1.0.0",
+  "description": "模組化點餐系統（page= 模式）",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
