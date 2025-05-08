@@ -1,0 +1,28 @@
+/* 首頁樣式 - homePage.css */
+.home-page {
+    text-align: center;
+    margin-top: 120px;
+  }
+  
+  .home-page h1 {
+    font-size: 48px;
+    color: #3e2723;
+    margin-bottom: 40px;
+    letter-spacing: 3px;
+  }
+  
+  .start-btn {
+    background-color: #ffa726;
+    color: white;
+    font-size: 24px;
+    padding: 12px 36px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .start-btn:hover {
+    background-color: #fb8c00;
+  }
+  
