@@ -1,60 +1,93 @@
-/* menuPage.css */
-
+/* Overall container */
 .menu-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  .menu-card {
-    width: 200px;
-    border: 1px solid #d8bfa2;
-    background-color: #fff8e7;
-    padding: 16px;
-    border-radius: 12px;
-    text-align: center;
-  }
-  
-  .menu-card img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-bottom: 10px;
-  }
-  
-  .menu-card h3 {
-    margin: 0 0 6px;
-    font-size: 18px;
-    color: #333;
-  }
-  
-  .menu-card p {
-    color: #e76f51;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .cart-btn {
-    background-color: #f4a261;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .next-btn {
-    display: block;
-    margin: 40px auto 0;
-    background-color: #f4a261;
-    color: white;
-    padding: 12px 28px;
-    border: none;
-    border-radius: 12px;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  gap: 20px;
+  margin: 30px;
+  padding: 20px;
+}
+
+/* Each menu card */
+.menu-card {
+  background-color: #f8d1a7; /* Light orange color */
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Menu title */
+.menu-card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+/* Price */
+.menu-card p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #f56c00; /* Orange */
+}
+
+/* Image for menu item */
+.menu-card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+/* Add to cart button */
+.cart-btn {
+  font-size: 14px; /* Reduce the font size */
+  padding: 8px 16px; /* Reduce the padding to make the button smaller */
+  border-radius: 5px; /* Optional: You can keep rounded corners */
+  background-color: #f78d42; /* Keep the button color */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-btn:hover {
+  background-color: #e6781c; /* Darker orange */
+}
+
+/* Quantity input area */
+.quantity-input {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.quantity-btn {
+  padding: 5px 10px;
+  background-color: #ffbf00;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.quantity-display {
+  font-size: 18px;
+  width: 50px;
+  text-align: center;
+}
+
+/* Button for navigation to cart */
+.cart-navigation {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cart-navigation button {
+  background-color: #ff5722;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+}

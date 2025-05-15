@@ -1,37 +1,45 @@
-export function createQuantityInput(initialValue = 1, onChange) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'quantity-input';
-  
-    const minusBtn = document.createElement('button');
-    minusBtn.textContent = '−';
-    minusBtn.className = 'btn';
-  
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.value = initialValue;
-    input.min = 1;
-    input.max = 500;
-  
-    const plusBtn = document.createElement('button');
-    plusBtn.textContent = '+';
-    plusBtn.className = 'btn';
-  
-    function updateValue(val) {
-      let num = parseInt(val);
-      if (isNaN(num) || num < 1) num = 1;
-      if (num > 500) num = 500;
-      input.value = num;
-      if (typeof onChange === 'function') onChange(num);
+export function createQuantityInput(initial = 1) {
+  let quantity = initial;
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'quantity-input';
+
+  const minusBtn = document.createElement('button');
+  minusBtn.textContent = '−';
+  minusBtn.className = 'btn';
+
+  const display = document.createElement('span');
+  display.textContent = quantity;
+  display.className = 'quantity-display'; // You can style this in CSS
+
+  const plusBtn = document.createElement('button');
+  plusBtn.textContent = '+';
+  plusBtn.className = 'btn';
+
+  // Update display
+  const updateDisplay = () => {
+    display.textContent = quantity;
+  };
+
+  // Click handlers
+  minusBtn.onclick = () => {
+    if (quantity > 1) {
+      quantity--;
+      updateDisplay();
     }
-  
-    minusBtn.onclick = () => updateValue(parseInt(input.value) - 1);
-    plusBtn.onclick = () => updateValue(parseInt(input.value) + 1);
-    input.onchange = () => updateValue(input.value);
-  
-    wrapper.appendChild(minusBtn);
-    wrapper.appendChild(input);
-    wrapper.appendChild(plusBtn);
-  
-    return wrapper;
-  }
-  
+  };
+
+  plusBtn.onclick = () => {
+    quantity++;
+    updateDisplay();
+  };
+
+  // Method to get value from outside
+  wrapper.getValue = () => quantity;
+
+  wrapper.appendChild(minusBtn);
+  wrapper.appendChild(display);
+  wrapper.appendChild(plusBtn);
+
+  return wrapper;
+}
