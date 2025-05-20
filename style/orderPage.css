@@ -1,31 +1,49 @@
-/* 點餐頁 - orderPage.css */
+/* ✅ 頁面整體背景與標題 */
+.order-page-container {
+  background-color: #fff9e6;
+  min-height: 100vh;
+  padding: 30px 20px;
+  box-sizing: border-box;
+}
 
+.order-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4b2e1f;
+  margin-bottom: 20px;
+}
+
+/* ✅ 商品列表容器設定（置中＋寬度限制） */
 .menu-container {
   display: flex;
   flex-direction: column;
   gap: 24px;
   align-items: center;
-  margin: 30px auto;
-  width: 720px; /* ✅ 容器變寬 */
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
 }
 
+/* ✅ 單一商品卡片樣式 */
 .menu-card {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%; /* 跟 container 同寬 */
-  border: 2px solid #c9a176; /* ✅ 粗一點的邊框 */
-  background-color: #ffffff; /* ✅ 純白背景 */
+  justify-content: space-between;
+  width: 100%;
+  max-width: 900px;
   padding: 16px 24px;
+  background-color: #ffffff;
+  border: 2px solid #c9a176;
   border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  gap: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  gap: 24px;
 }
+
 
 .menu-card img {
   width: 100px;
   height: 100px;
-  object-fit: contain; 
+  object-fit: contain;
   margin-right: 10px;
   flex-shrink: 0;
 }
@@ -33,9 +51,9 @@
 .menu-card .info {
   flex: 2;
   display: flex;
-  flex-direction: row; /* ✅ 改為橫向排版 */
-  align-items: center; /* ✅ 垂直置中所有字體 */
-  gap: 20px; /* ✅ 名稱、價格、控制區之間間距 */
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
   white-space: nowrap;
 }
 
@@ -60,9 +78,95 @@
   gap: 10px;
   flex-shrink: 0;
 }
+.menu-actions {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-start; /* ❗改為靠左分配空間，不要全部集中右邊 */
+  white-space: nowrap;
+}
 
 
-/* 數量元件樣式 */
+.menu-info {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.menu-price {
+  font-size: 16px;
+  color: #e76f51;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.menu-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  flex: 1;
+}
+.menu-info {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* ✅ 加入購物車按鈕（黃色 + 咖啡字 + 無邊框） */
+.cart-btn {
+  background-color: #f4a261;     /* ✅ 橘色主色 */
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.cart-btn:hover {
+  background-color: #e76f51;     /* ✅ 深橘色 hover */
+}
+
+/* 🎯 想調整「加入購物車按鈕長度」，請修改這裡的 padding 或 font-size */
+/* 例如加寬長度 ➜ padding: 10px 28px; */
+
+/* ✅ 下一步（前往購物車）按鈕 */
+.next-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 🎯 控制整顆按鈕大小的關鍵 */
+  height: 50px;            /* 🎯 按鈕高度 */
+  min-width: 140px;        /* 🎯 按鈕最小寬度 */
+  font-size: 18px;         /* 🎯 字體大小 */
+  font-weight: bold;       /* 🎯 字體粗細 */
+  padding: 8px 24px;       /* 🎯 內距會影響整體尺寸 */
+
+  background-color: #f4a261;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  display: block;
+  margin: 30px auto 0;
+  text-align: center;
+}
+
+.next-btn:hover {
+  background-color: #e76f51;
+}
+
+
+/* ✅ 數量控制元件樣式 */
 .quantity-input {
   display: inline-flex;
   align-items: center;
@@ -70,80 +174,43 @@
   border-radius: 6px;
   overflow: hidden;
   background: white;
-  height: 32px; /* ✅ 減少高度讓數字不會太擠 */
+  height: 32px;
 }
 
 .quantity-input .btn {
-  width: 28px; /* ✅ 原本 36px 太寬 */
+  width: 28px;
   height: 32px;
-  font-size: 20px; /* ✅ 稍微變小 */
+  font-size: 20px;
   background: #f0f0f0;
   border: none;
   cursor: pointer;
   padding: 0;
 }
 
+/* ✅ 數字顯示（非 input） */
+.quantity-display {
+  font-size: 14px;
+  width: 32px;
+  text-align: center;
+}
+
+/* ✅ 若使用 <input> 顯示數字，這裡控制樣式 */
 .quantity-input input {
-  width: 28px; 
+  width: 28px;
   text-align: center;
   border: none;
-  font-size: 16px;
+  font-size: 1px; /* 若沒用到 <input> 可忽略 */
   height: 100%;
   outline: none;
   padding: 0;
 }
 
-
-.cart-btn {
-  background-color: #f4a261;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-/* 下方按鈕 */
-.next-btn {
-  margin-top: 30px;
-  background-color: #f4a261;
-  color: white;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  cursor: pointer;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* 去掉 input 數字箭頭 */
+/* ✅ 去除數字 input 上下箭頭 */
 .quantity-input input::-webkit-outer-spin-button,
 .quantity-input input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 .quantity-input input[type=number] {
   -moz-appearance: textfield;
-}
-
-/* ✅ 新增的背景與標題樣式 */
-.order-page-container {
-  background-color: #fff9e6;
-  padding: 30px;
-  border-radius: 0px;
-  text-align: center;
-  width: 100vw;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
-
-.order-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #4b2e1f;
-  margin-bottom: 20px;
 }
