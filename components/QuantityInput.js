@@ -24,7 +24,7 @@ export function createQuantityInput(initial = 1, onChange) {
   };
 
   minusBtn.onclick = () => {
-    if (quantity > 1) {
+    if (quantity > 0) {
       quantity--;
       updateDisplay();
     }

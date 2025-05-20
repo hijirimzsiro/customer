@@ -14,7 +14,12 @@ export function renderCartPage(container) {
 
   const header = document.createElement('div');
   header.className = 'cart-header';
-  header.innerHTML = `<span>品項</span><span>價格</span>`;
+  header.innerHTML = `
+  <span style="flex: 1; text-align: left; padding-left: 12px;">品項</span>
+  <span style="flex: 1; text-align: center;">數量</span>
+  <span style="flex: 1; text-align: right; padding-right: 8px;">價格</span>
+`;
+
   card.appendChild(header);
 
   const { element: cartList, refresh } = createCartList(updateTotal, updateTotal);

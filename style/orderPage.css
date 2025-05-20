@@ -11,6 +11,7 @@
   font-weight: bold;
   color: #4b2e1f;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 /* ✅ 商品列表容器設定（置中＋寬度限制） */
@@ -78,13 +79,15 @@
   gap: 10px;
   flex-shrink: 0;
 }
+
 .menu-actions {
   flex: 2;
   display: flex;
   align-items: center;
-  gap: 16px;
-  justify-content: flex-start; /* ❗改為靠左分配空間，不要全部集中右邊 */
+  gap: 120px;
+  justify-content: flex-start;
   white-space: nowrap;
+  transform: translateX(-30px); /* ← 向左偏移 */
 }
 
 
@@ -101,12 +104,14 @@
   font-weight: bold;
   white-space: nowrap;
 }
+
 .menu-image {
   width: 100px;
   height: 100px;
   object-fit: contain;
   flex: 1;
 }
+
 .menu-info {
   flex: 2;
   display: flex;
@@ -117,7 +122,8 @@
 
 /* ✅ 加入購物車按鈕（黃色 + 咖啡字 + 無邊框） */
 .cart-btn {
-  background-color: #f4a261;     /* ✅ 橘色主色 */
+  background-color: #f4a261;
+  /* ✅ 橘色主色 */
   color: white;
   font-weight: bold;
   font-size: 16px;
@@ -130,7 +136,8 @@
 }
 
 .cart-btn:hover {
-  background-color: #e76f51;     /* ✅ 深橘色 hover */
+  background-color: #e76f51;
+  /* ✅ 深橘色 hover */
 }
 
 /* 🎯 想調整「加入購物車按鈕長度」，請修改這裡的 padding 或 font-size */
@@ -143,11 +150,16 @@
   justify-content: center;
 
   /* 🎯 控制整顆按鈕大小的關鍵 */
-  height: 50px;            /* 🎯 按鈕高度 */
-  min-width: 140px;        /* 🎯 按鈕最小寬度 */
-  font-size: 18px;         /* 🎯 字體大小 */
-  font-weight: bold;       /* 🎯 字體粗細 */
-  padding: 8px 24px;       /* 🎯 內距會影響整體尺寸 */
+  height: 50px;
+  /* 🎯 按鈕高度 */
+  min-width: 140px;
+  /* 🎯 按鈕最小寬度 */
+  font-size: 18px;
+  /* 🎯 字體大小 */
+  font-weight: bold;
+  /* 🎯 字體粗細 */
+  padding: 8px 24px;
+  /* 🎯 內距會影響整體尺寸 */
 
   background-color: #f4a261;
   color: white;
@@ -199,7 +211,8 @@
   width: 28px;
   text-align: center;
   border: none;
-  font-size: 1px; /* 若沒用到 <input> 可忽略 */
+  font-size: 1px;
+  /* 若沒用到 <input> 可忽略 */
   height: 100%;
   outline: none;
   padding: 0;
@@ -211,6 +224,7 @@
   -webkit-appearance: none;
   margin: 0;
 }
+
 .quantity-input input[type=number] {
   -moz-appearance: textfield;
 }

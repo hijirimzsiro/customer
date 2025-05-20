@@ -1,3 +1,5 @@
+/* === 購物車頁樣式 === */
+
 .cart-page-container {
   background-color: #fff9e6;
   min-height: 100vh;
@@ -13,7 +15,7 @@
   border-radius: 16px;
   border: 1px solid #d8bfa2;
   padding: 20px;
-  max-width: 500px;
+  max-width: 900px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -43,22 +45,41 @@
 
 .cart-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 15px;
-  padding: 6px 0;
+  justify-content: space-between;
+  padding: 10px 0;
   border-bottom: 1px solid #eee;
+  gap: 8px;
 }
 
-.cart-item span {
+.cart-item-name {
+  flex: 2;
+  text-align: left;
+  font-size: 16px;
+  padding-left: 12px; /* ⬅️ 新增這行讓品名內縮 */
+}
+
+
+.cart-item-controls {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.cart-item-price {
   flex: 1;
+  text-align: right;
+  font-size: 16px;
+  font-weight: normal;
 }
 
-.remove-btn {
+.cart-item-remove {
+  flex: 0;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
+  margin-left: 6px;
 }
 
 .cart-total {
@@ -94,6 +115,9 @@
 .cart-btn-group button:last-child {
   background-color: #f4a261;
 }
+
+
+/* === 數量控制元件（共用） === */
 
 .quantity-input {
   display: inline-flex;
@@ -134,39 +158,71 @@
   -moz-appearance: textfield;
 }
 
-.cart-item {
+
+/* === 商品卡片頁樣式 === */
+
+.menu-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-  gap: 8px;
+  width: 100%;
+  max-width: 900px;
+  padding: 16px 24px;
+  background-color: #ffffff;
+  border: 2px solid #c9a176;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  gap: 24px;
 }
 
-.cart-item-name {
-  flex: 2;
-  text-align: left;
-  font-size: 16px;
+/* ✅ 左側圖片欄 */
+.menu-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  flex: 0 0 100px;
 }
 
-.cart-item-controls {
-  flex: 2;
+/* ✅ 中間：品名 */
+.menu-info {
+  flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
-.cart-item-price {
-  flex: 1;
-  text-align: right;
-  font-size: 16px;
-  font-weight: normal;
+/* ✅ 右側：價格＋數量＋按鈕（一起橫排） */
+.menu-actions {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between; /* 🎯 平均分散三個元素 */
+  white-space: nowrap;
 }
 
-.cart-item-remove {
-  flex: 0;
-  background: none;
-  border: none;
-  cursor: pointer;
+/* ✅ 價格文字 */
+.menu-price {
   font-size: 16px;
-  margin-left: 6px;
+  color: #e76f51;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* ✅ 加入購物車按鈕 */
+.cart-btn {
+  background-color: #f4a261;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.cart-btn:hover {
+  background-color: #e76f51;
 }
