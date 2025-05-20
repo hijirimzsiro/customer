@@ -25,7 +25,7 @@
 .menu-card img {
   width: 100px;
   height: 100px;
-  object-fit: cover;
+  object-fit: contain; 
   margin-right: 10px;
   flex-shrink: 0;
 }
@@ -70,25 +70,29 @@
   border-radius: 6px;
   overflow: hidden;
   background: white;
+  height: 32px; /* ✅ 減少高度讓數字不會太擠 */
 }
 
 .quantity-input .btn {
-  width: 36px;
-  height: 36px;
-  font-size: 18px;
+  width: 28px; /* ✅ 原本 36px 太寬 */
+  height: 32px;
+  font-size: 20px; /* ✅ 稍微變小 */
   background: #f0f0f0;
   border: none;
   cursor: pointer;
+  padding: 0;
 }
 
 .quantity-input input {
-  width: 40px;
+  width: 28px; 
   text-align: center;
   border: none;
   font-size: 16px;
-  height: 36px;
+  height: 100%;
   outline: none;
+  padding: 0;
 }
+
 
 .cart-btn {
   background-color: #f4a261;

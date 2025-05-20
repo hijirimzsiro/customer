@@ -1,41 +1,59 @@
-/* 訂單完成頁 - confirmationPage.css */
+.confirmation-container {
+  background-color: #fff9e6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  box-sizing: border-box;
+  width: 100vw;
+}
 
-.order-status {
-    text-align: center;
-    margin-top: 50px;
-  }
-  
-  .order-status h3 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .order-status p {
-    font-size: 18px;
-    margin: 6px 0;
-  }
-  
-  .order-number {
-    font-size: 48px;
-    font-weight: bold;
-    background: #fcebd3;
-    width: 120px;
-    height: 120px;
-    line-height: 120px;
-    margin: 20px auto;
-    border-radius: 50%;
-    color: #8d5c2c;
-  }
-  
-  .next-btn {
-    background-color: #f4e04d;
-    color: black;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    display: inline-block;
-  }
-  
+.confirm-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4b2e1f;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.confirm-sub,
+.confirm-wait {
+  font-size: 16px;
+  color: #4b2e1f;
+  margin: 6px 0;
+  text-align: center;
+}
+
+.order-number {
+  background: #fcebd3;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 20px auto 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: bold;
+  color: #8d5c2c;
+}
+
+.order-unit {
+  font-size: 20px;
+  color: #8d5c2c;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.next-btn {
+  margin-top: 20px;
+  background-color: #f4a261;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}

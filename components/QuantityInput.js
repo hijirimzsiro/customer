@@ -1,4 +1,4 @@
-export function createQuantityInput(initial = 1) {
+export function createQuantityInput(initial = 1, onChange) {
   let quantity = initial;
 
   const wrapper = document.createElement('div');
@@ -10,18 +10,19 @@ export function createQuantityInput(initial = 1) {
 
   const display = document.createElement('span');
   display.textContent = quantity;
-  display.className = 'quantity-display'; // You can style this in CSS
+  display.className = 'quantity-display';
 
   const plusBtn = document.createElement('button');
   plusBtn.textContent = '+';
   plusBtn.className = 'btn';
 
-  // Update display
   const updateDisplay = () => {
     display.textContent = quantity;
+    if (typeof onChange === 'function') {
+      onChange(quantity); // ✅ 通知外部
+    }
   };
 
-  // Click handlers
   minusBtn.onclick = () => {
     if (quantity > 1) {
       quantity--;
@@ -34,7 +35,6 @@ export function createQuantityInput(initial = 1) {
     updateDisplay();
   };
 
-  // Method to get value from outside
   wrapper.getValue = () => quantity;
 
   wrapper.appendChild(minusBtn);

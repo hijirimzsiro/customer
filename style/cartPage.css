@@ -1,90 +1,172 @@
-/* 購物車頁 - cartPage.css */
+.cart-page-container {
+  background-color: #fff9e6;
+  min-height: 100vh;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cart-box {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #d8bfa2;
+  padding: 20px;
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cart-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #4b2e1f;
+  margin-bottom: 12px;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f4a261;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
 
 .cart-list {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #d8bfa2;
-    margin-bottom: 20px;
-  }
-  
-  .cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    padding: 8px 0;
-    font-size: 16px;
-  }
-  
-  .cart-item span {
-    flex: 1;
-    text-align: center;
-  }
-  
-  .remove-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  .total-amount {
-    font-size: 20px;
-    font-weight: bold;
-    color: #e76f51;
-    margin: 20px 0;
-    text-align: right;
-  }
-  
-  .btn-group {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-  }
-  
-  .btn-group button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 12px;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .btn-group button:first-child {
-    background-color: #999;
-  }
-  
-  .btn-group button:last-child {
-    background-color: #e76f51;
-  }
-  
-  /* 數量元件樣式 */
-  .quantity-input {
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    overflow: hidden;
-    background: white;
-  }
-  
-  .quantity-input .btn {
-    width: 36px;
-    height: 36px;
-    font-size: 18px;
-    background: #f0f0f0;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .quantity-input input {
-    width: 60px;
-    text-align: center;
-    border: none;
-    font-size: 16px;
-    height: 36px;
-    outline: none;
-  }
-  
+  margin-bottom: 10px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item span {
+  flex: 1;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.cart-total {
+  text-align: right;
+  font-size: 16px;
+  font-weight: bold;
+  color: #e76f51;
+  margin-top: 8px;
+}
+
+.cart-btn-group {
+  margin-top: 16px;
+  background-color: #fde2c3;
+  padding: 16px;
+  border-radius: 0 0 16px 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-btn-group button {
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+}
+
+.cart-btn-group button:first-child {
+  background-color: #999;
+}
+
+.cart-btn-group button:last-child {
+  background-color: #f4a261;
+}
+
+.quantity-input {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+  height: 32px;
+}
+
+.quantity-input .btn {
+  width: 28px;
+  height: 32px;
+  font-size: 16px;
+  background: #f0f0f0;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.quantity-input input {
+  width: 32px;
+  text-align: center;
+  border: none;
+  font-size: 16px;
+  height: 100%;
+  outline: none;
+  padding: 0;
+}
+
+.quantity-input input::-webkit-outer-spin-button,
+.quantity-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.quantity-input input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  gap: 8px;
+}
+
+.cart-item-name {
+  flex: 2;
+  text-align: left;
+  font-size: 16px;
+}
+
+.cart-item-controls {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.cart-item-price {
+  flex: 1;
+  text-align: right;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.cart-item-remove {
+  flex: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 6px;
+}
