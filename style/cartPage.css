@@ -21,6 +21,7 @@
 }
 
 .cart-title {
+  text-align: center;
   font-size: 18px;
   font-weight: bold;
   color: #4b2e1f;
@@ -83,10 +84,11 @@
 
 .cart-total {
   text-align: right;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
   color: #e76f51;
   margin-top: 8px;
+  padding: 2px 26px;
 }
 
 .cart-btn-group {
@@ -160,7 +162,7 @@
   margin: 0;
 }
 
-.quantity-input input[type=number] {
+·.quantity-input input[type=number] {
   -moz-appearance: textfield;
 }
 
