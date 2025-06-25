@@ -13,34 +13,29 @@ export function renderCartPage(container) {
   card.appendChild(title);
 
   const header = document.createElement('div');
-header.className = 'cart-header';
+  header.className = 'cart-header';
 
-// Create three individual span elements for 品項, 數量, and 價格
-const itemHeader = document.createElement('span');
-itemHeader.style.flex = '1.9';
-itemHeader.style.textAlign = 'left';
-itemHeader.style.paddingLeft = '12px';
-itemHeader.innerText = '品項';
+  const itemHeader = document.createElement('span');
+  itemHeader.style.flex = '1.9';
+  itemHeader.style.textAlign = 'left';
+  itemHeader.style.paddingLeft = '12px';
+  itemHeader.innerText = '品項';
 
-const quantityHeader = document.createElement('span');
-quantityHeader.style.flex = '1';
-quantityHeader.style.textAlign = 'center';
-quantityHeader.innerText = '數量';
+  const quantityHeader = document.createElement('span');
+  quantityHeader.style.flex = '1';
+  quantityHeader.style.textAlign = 'center';
+  quantityHeader.innerText = '數量';
 
-const priceHeader = document.createElement('span');
-priceHeader.style.flex = '1.75';
-priceHeader.style.textAlign = 'right';
-priceHeader.style.paddingRight = '32px';
-priceHeader.innerText = '價格';
+  const priceHeader = document.createElement('span');
+  priceHeader.style.flex = '1.75';
+  priceHeader.style.textAlign = 'right';
+  priceHeader.style.paddingRight = '32px';
+  priceHeader.innerText = '價格';
 
-// Add each span to the header div
-header.appendChild(itemHeader);
-header.appendChild(quantityHeader);
-header.appendChild(priceHeader);
-
-// Append the header to the card
-card.appendChild(header);
-
+  header.appendChild(itemHeader);
+  header.appendChild(quantityHeader);
+  header.appendChild(priceHeader);
+  card.appendChild(header);
 
   const { element: cartList, refresh } = createCartList(updateTotal, updateTotal);
   card.appendChild(cartList);
@@ -67,25 +62,24 @@ card.appendChild(header);
     }
 
     const items = cart.map(item => ({
-      menu_name: item.name,
+      menu_id: item.id, // ✅ 修正為後端接受的欄位
       quantity: item.quantity
     }));
 
-    const total_price = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
     try {
-      const response = await fetch("http://127.0.0.1:5000/orders/place_order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ items, total_price })
-      });
+   const response = await fetch("http://127.0.0.1:5000/public_place_order", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ items })
+});
+
 
       if (!response.ok) throw new Error("送出訂單失敗");
 
-      const orderNumber = Math.floor(Math.random() * 90000) + 10000;
-      localStorage.setItem('orderNumber', orderNumber);
+      const result = await response.json();
+      localStorage.setItem('orderNumber', result.order_id); // ✅ 儲存訂單編號
       localStorage.removeItem('cart');
       window.location.href = '?page=confirm';
     } catch (err) {

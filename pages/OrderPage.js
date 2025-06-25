@@ -1,67 +1,63 @@
-const API_BASE_URL = "http://127.0.0.1:5000"; // or your backend address
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./index.css";
 
-import { createMenuCard } from '../components/MenuSelector.js';
+const API_URL = "http://127.0.0.1:5000";
 
-const menu = [
-  { id: '原味紅豆餅', name: '原味紅豆餅', price: 15, imgUrl: './images/紅豆.png' },
-  { id: '奶油餅', name: '奶油餅', price: 15, imgUrl: './images/奶油.png' },
-  { id: '花生餅', name: '花生餅', price: 15, imgUrl: './images/花生.jpg' },
-  { id: '巧克力餅', name: '巧克力餅', price: 20, imgUrl: './images/巧克力.png' },
-  { id: 'OREO鮮奶油餅', name: 'OREO鮮奶油餅', price: 20, imgUrl: './images/OREO鮮奶油.jpg' },
-  { id: '可可布朗尼餅', name: '可可布朗尼餅', price: 20, imgUrl: './images/可可布朗尼.jpg' },
-  { id: '紅豆麻糬餅', name: '紅豆麻糬餅', price: 20, imgUrl: './images/紅豆麻糬.jpeg' },
-  { id: '抹茶麻糬餅', name: '抹茶麻糬餅', price: 20, imgUrl: './images/抹茶麻糬.jpg' },
-  { id: '黑芝麻鮮奶油餅', name: '黑芝麻鮮奶油餅', price: 20, imgUrl: './images/黑芝麻鮮奶油.jpg' },
-  { id: '珍珠鮮奶油餅', name: '珍珠鮮奶油餅', price: 20, imgUrl: './images/珍珠鮮奶油.jpg' }
-];
+function OrderPage() {
+  const [menuItems, setMenuItems] = useState([]);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    fetch(`${API_URL}/public_menus`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMenuItems(data.menus || []);
+      })
+      .catch((error) => console.error("❌ 無法取得菜單：", error));
+  }, []);
 
-export function renderOrderPage(container) {
-  container.innerHTML = '';
+  const handleAddToCart = (item) => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existing = cart.find((i) => i.menu_id === item.menu_id);
 
-  // ✅ 外層容器 - 套用背景與邊界
-  const pageWrapper = document.createElement('div');
-  pageWrapper.className = 'order-page-container';
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({
+        menu_id: item.menu_id,
+        name: item.name,
+        price: item.price,
+        quantity: 1,
+        imgUrl: item.imgUrl
+      });
+    }
 
-  // ✅ 標題 - 改用 .order-title class 套用樣式
-  const title = document.createElement('h2');
-  title.textContent = '請選擇想購買的品項';
-  title.className = 'order-title';
-  pageWrapper.appendChild(title);
-
-  const menuArea = document.createElement('div');
-  menuArea.className = 'menu-container';
-
-  menu.forEach(item => {
-    const card = createMenuCard(item, (orderItem) => {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const existing = cart.find(i => i.id === orderItem.id);
-      if (existing) {
-        existing.quantity += orderItem.quantity;
-      } else {
-        cart.push(orderItem);
-      }
-      localStorage.setItem('cart', JSON.stringify(cart));
-      alert(`${orderItem.name} x${orderItem.quantity} 已加入購物車`);
-    });
-    menuArea.appendChild(card);
-  });
-
-  const btnWrapper = document.createElement('div');
-  btnWrapper.style.textAlign = 'center';
-  btnWrapper.style.marginTop = '20px';
-
-  const toCartBtn = document.createElement('button');
-  toCartBtn.textContent = '前往購物車';
-  toCartBtn.className = 'next-btn';
-  toCartBtn.onclick = () => {
-    window.location.href = '?page=cart';
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`✅ ${item.name} 已加入購物車`);
   };
 
-  btnWrapper.appendChild(toCartBtn);
-
-  // ✅ 加入背景容器中
-  pageWrapper.appendChild(menuArea);
-  pageWrapper.appendChild(btnWrapper);
-  container.appendChild(pageWrapper);
+  return (
+    <div className="order-page-container">
+      <h1 className="order-title">請選擇您想要的品項</h1>
+      <div className="menu-container">
+        {menuItems.map((item) => (
+          <div className="menu-card" key={item.menu_id}>
+            <img
+              src={item.imgUrl}
+              alt={item.name}
+              className="menu-image"
+            />
+            <div className="menu-info">
+              <h3>{item.name}</h3>
+              <p>價格：{item.price} 元</p>
+              <button onClick={() => handleAddToCart(item)}>加入購物車</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
+
+export default OrderPage;
