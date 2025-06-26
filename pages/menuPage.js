@@ -102,7 +102,7 @@ export async function renderMenuPage(container) {
     // ✅ 新增：底部「前往購物車」按鈕
     const goToCart = document.createElement('button');
     goToCart.textContent = '前往購物車';
-    goToCart.className = 'go-cart-btn';
+    goToCart.className = 'next-btn';
     goToCart.onclick = () => {
       window.location.href = '?page=cart';
     };

@@ -33,7 +33,7 @@ body {
   justify-content: space-between;
   width: 100%;
   max-width: 900px;
-  padding: 16px 24px;
+  padding: 20px 30px;
   background-color: #ffffff;
   border: 2px solid #c9a176;
   border-radius: 12px;
@@ -55,7 +55,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 20px;
 }
+
 
 /* ✅ 商品價格 */
 .menu-price {
@@ -63,17 +65,23 @@ body {
   color: #e76f51;
   font-weight: bold;
   white-space: nowrap;
+
+  position: relative;
+  top: -16px;
+  /* ✅ 數字越大，字越往上 */
 }
 
-/* ✅ 按鈕與數量區塊 */
 .menu-actions {
   flex: 2;
   display: flex;
   align-items: center;
-  gap: 16px;
-  justify-content: space-between;
+  gap: 200px;
+  /* 控制數量區與購物車按鈕的間距 */
+  justify-content: flex-start;
+  /* 對齊靠左 */
   white-space: nowrap;
 }
+
 
 /* ✅ 加入購物車按鈕 */
 .cart-btn {
@@ -93,38 +101,43 @@ body {
   background-color: #e76f51;
 }
 
-/* ✅ 數量控制元件（同步 cartPage） */
+/* ✅ 數量控制元件（menuPage 專用） */
 .quantity-input {
   display: inline-flex;
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 6px;
+  /* 無圓角 */
   overflow: hidden;
   background: white;
   height: 32px;
-  gap: 8px;
 }
 
 .quantity-input .btn {
-  width: 28px;
+  width: 40px;
   height: 32px;
   font-size: 20px;
   background: #f0f0f0;
   border: none;
   cursor: pointer;
   padding: 0;
+  font-weight: bold;
 }
 
 .quantity-input .btn:hover {
   background-color: #f4a261;
+  /* 橘色 hover */
+  color: white;
 }
 
 .quantity-input input {
-  width: 28px;
+  width: 40px;
+  height: 32px;
   text-align: center;
   border: none;
-  font-size: 16px;
-  height: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  background: white;
   outline: none;
   padding: 0;
 }
@@ -141,26 +154,34 @@ body {
 }
 
 /* ✅ 下一步按鈕 */
+/* ✅ 下一步（前往購物車）按鈕（與 cart-btn 統一風格） */
 .next-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  min-width: 140px;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 8px 24px;
   background-color: #f4a261;
   color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 24px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
+  white-space: nowrap;
   transition: background-color 0.3s ease;
+
+  /* ✅ 置中顯示在最下方 */
   display: block;
-  margin: 30px auto 0;
+  margin: 40px auto 60px;
+  /* top, auto-center, bottom space */
   text-align: center;
 }
 
 .next-btn:hover {
   background-color: #e76f51;
+}
+
+/* ✅ 品項名稱字體縮小設定 */
+.menu-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
 }
