@@ -2,7 +2,7 @@ export function renderHomePage(container) {
   container.innerHTML = '';
 
   const title = document.createElement('h2');
-  title.textContent = '歡迎選購紅豆餅商品';
+  title.textContent = '歡迎選購紅豆餅';
   title.className = 'home-title';
 
   const buttonGroup = document.createElement('div');
@@ -12,7 +12,7 @@ export function renderHomePage(container) {
   orderBtn.textContent = '開始點餐';
   orderBtn.className = 'nav-button';
   orderBtn.onclick = () => {
-    window.location.href = '?page=order';
+    window.location.href = '?page=menu'; // ✅ 已修正
   };
 
   const cartBtn = document.createElement('button');

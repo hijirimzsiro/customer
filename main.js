@@ -1,6 +1,5 @@
-import { renderHomePage } from './pages/HomePage.js';
+import { renderHomePage } from './pages/HomePage.js'; 
 import { renderMenuPage } from './pages/menuPage.js';
-import { renderOrderPage } from './pages/OrderPage.js';
 import { renderCartPage } from './pages/CartPage.js';
 import { renderConfirmationPage } from './pages/ConfirmationPage.js';
 
@@ -8,7 +7,6 @@ import { renderConfirmationPage } from './pages/ConfirmationPage.js';
 const pages = {
   home: { render: renderHomePage, css: 'homePage.css' },
   menu: { render: renderMenuPage, css: 'menuPage.css' },
-  order: { render: renderOrderPage, css: 'orderPage.css' },
   cart: { render: renderCartPage, css: 'cartPage.css' },
   confirm: { render: renderConfirmationPage, css: 'confirmationPage.css' },
 };
@@ -37,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(link);
     render(app);
   } else {
-    console.warn(`未定義的頁面: ${page}，自動導向 menu`);
+    console.warn(`未定義的頁面: ${page}，自動導向 home`);
     window.location.href = '?page=home';
   }
 });

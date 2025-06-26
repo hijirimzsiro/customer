@@ -62,7 +62,7 @@ export function renderCartPage(container) {
     }
 
     const items = cart.map(item => ({
-      menu_id: item.id, // ✅ 修正為後端接受的欄位
+      menu_id: item.menu_id, 
       quantity: item.quantity
     }));
 
