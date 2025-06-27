@@ -57,7 +57,7 @@
   flex: 3;
   text-align: left;
   font-size: 16px;
-  padding-left: 12px; /* ⬅️ 新增這行讓品名內縮 */
+  padding-left: 12px;
 }
 
 .cart-item-controls {
@@ -91,6 +91,7 @@
   padding: 2px 26px;
 }
 
+/* ✅ 統一按鈕樣式 */
 .cart-btn-group {
   margin-top: 16px;
   background-color: #fde2c3;
@@ -101,20 +102,44 @@
 }
 
 .cart-btn-group button {
-  border: none;
-  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+
+  border: 3px solid #a47551;
+  padding: 0 20px;
   font-size: 16px;
-  border-radius: 12px;
+  font-weight: bold;
   color: white;
+  border-radius: 15px;
   cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.cart-btn-group button:first-child,
+.cart-btn-group button:last-child {
+  border: none;
+}
+
 
 .cart-btn-group button:first-child {
   background-color: #999;
 }
 
+.cart-btn-group button:first-child:hover {
+  background-color: #777;
+}
+
 .cart-btn-group button:last-child {
   background-color: #f4a261;
+}
+
+.cart-btn-group button:last-child:hover {
+  background-color: #e76f51;
 }
 
 
@@ -124,11 +149,11 @@
   display: inline-flex;
   align-items: center;
   border: 1px solid #ccc;
-  border-radius: 6px; /* 增加圓角 */
+  border-radius: 6px;
   overflow: hidden;
   background: white;
   height: 32px;
-  gap: 8px; /* 增加按鈕與數字顯示的間距 */
+  gap: 8px;
 }
 
 .quantity-input .btn {
@@ -142,7 +167,7 @@
 }
 
 .quantity-input .btn:hover {
-  background-color: #f4a261; /* 橘色hover */
+  background-color: #f4a261;
 }
 
 .quantity-input input {
@@ -155,14 +180,13 @@
   padding: 0;
 }
 
-/* 去除數字 input 上下箭頭 */
 .quantity-input input::-webkit-outer-spin-button,
 .quantity-input input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-·.quantity-input input[type=number] {
+.quantity-input input[type=number] {
   -moz-appearance: textfield;
 }
 
@@ -199,13 +223,13 @@
   justify-content: center;
 }
 
-/* ✅ 右側：價格＋數量＋按鈕（一起橫排） */
+/* ✅ 右側：價格＋數量＋按鈕 */
 .menu-actions {
   flex: 2;
   display: flex;
   align-items: center;
   gap: 16px;
-  justify-content: space-between; /* 🎯 平均分散三個元素 */
+  justify-content: space-between;
   white-space: nowrap;
 }
 
@@ -217,18 +241,27 @@
   white-space: nowrap;
 }
 
-/* ✅ 加入購物車按鈕 */
+/* ✅ 加入購物車按鈕（統一風格） */
 .cart-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+
   background-color: #f4a261;
-  color: white;
-  font-weight: bold;
+  border: 3px solid #a47551;
+  padding: 0 20px;
   font-size: 16px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 12px;
+  font-weight: bold;
+  color: white;
+  border-radius: 15px;
   cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   white-space: nowrap;
-  transition: background-color 0.3s ease;
 }
 
 .cart-btn:hover {

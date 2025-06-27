@@ -48,12 +48,30 @@
 }
 
 .next-btn {
-  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 48px;                 /* ⬅️ 比原本 60px 小一點 */
+  line-height: 48px;
+  text-align: center;
+
   background-color: #f4a261;
   color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 16px;
-  border: none;
+  padding: 0 16px;              /* ⬅️ 減少 padding */
+  font-size: 16px;              /* ⬅️ 保持字體不變 */
+  font-weight: bold;
+  border: none;                 /* ⬅️ 無邊框 */
+  border-radius: 15px;
+  width: 180px;                 /* ⬅️ 比原本 220px 窄一點 */
   cursor: pointer;
+  transition: 0.3s;
+  box-shadow: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  margin-top: 20px;             /* ⬅️ 往下拉一點距離 */
+}
+
+.next-btn:hover {
+  background-color: #e76f51;
 }

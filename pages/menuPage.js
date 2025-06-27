@@ -62,7 +62,7 @@ export async function renderMenuPage(container) {
       plusBtn.className = 'btn';
 
       minusBtn.onclick = () => {
-        if (parseInt(quantity.value) > 1) {
+        if (parseInt(quantity.value) > 0) {
           quantity.value = parseInt(quantity.value) - 1;
         }
       };

@@ -25,20 +25,30 @@ body {
 }
 
 /* 單一按鈕樣式 */
+/* 單一按鈕樣式 - 按照範本設計，保留原本橘色 */
 .nav-button {
-  padding: 14px 28px;
-  font-size: 18px;
-  background-color: #f4a261; /* ✅ 橘色按鈕 */
-  color: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  width: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 60px;
+  line-height: 60px;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.2s ease;
+
+  background-color: #f4a261;          /* ✅ 原本的橘色 */
+  border: 3px solid #916752;          /* ✅ 範本的深棕色框線 */
+  padding: 8px;
+  font-size: 20px;                    /* ✅ 範本的字體大小 */
+  font-weight: bold;
+  color: white;                       /* ✅ 原本白字 */
+  border-radius: 15px;                /* ✅ 範本的圓角 */
+  width: 220px;                       /* ✅ 保留原始寬度 */
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: none;                   /* ✅ 範本沒有 box-shadow */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  /* ✅ 範本字型 */
 }
 
 .nav-button:hover {
-  background-color: #e76f51; /* ✅ hover 深橘色 */
+  background-color: #e76f51;          /* ✅ 原本的 hover 深橘色 */
 }
