@@ -101,57 +101,7 @@ body {
   background-color: #e76f51;
 }
 
-/* ✅ 數量控制元件（menuPage 專用） */
-.quantity-input {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  /* 無圓角 */
-  overflow: hidden;
-  background: white;
-  height: 32px;
-}
 
-.quantity-input .btn {
-  width: 40px;
-  height: 32px;
-  font-size: 20px;
-  background: #f0f0f0;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  font-weight: bold;
-}
-
-.quantity-input .btn:hover {
-  background-color: #f4a261;
-  /* 橘色 hover */
-  color: white;
-}
-
-.quantity-input input {
-  width: 40px;
-  height: 32px;
-  text-align: center;
-  border: none;
-  font-size: 20px;
-  font-weight: bold;
-  background: white;
-  outline: none;
-  padding: 0;
-}
-
-/* 去除數字 input 上下箭頭 */
-.quantity-input input::-webkit-outer-spin-button,
-.quantity-input input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.quantity-input input[type=number] {
-  -moz-appearance: textfield;
-}
 
 /* ✅ 下一步按鈕 */
 /* ✅ 下一步（前往購物車）按鈕（與 cart-btn 統一風格） */
@@ -184,4 +134,52 @@ body {
   font-weight: bold;
   margin: 0;
   color: #333;
+}
+
+/* === 數量控制元件（共用） === */
+
+.quantity-input {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px; /* 增加圓角 */
+  overflow: hidden;
+  background: white;
+  height: 32px;
+  gap: 8px; /* 增加按鈕與數字顯示的間距 */
+}
+
+.quantity-input .btn {
+  width: 28px;
+  height: 32px;
+  font-size: 20px;
+  background: #f0f0f0;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.quantity-input .btn:hover {
+  background-color: #f4a261; /* 橘色hover */
+}
+
+.quantity-input input {
+  width: 28px;
+  text-align: center;
+  border: none;
+  font-size: 16px;
+  height: 100%;
+  outline: none;
+  padding: 0;
+}
+
+/* 去除數字 input 上下箭頭 */
+.quantity-input input::-webkit-outer-spin-button,
+.quantity-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+·.quantity-input input[type=number] {
+  -moz-appearance: textfield;
 }

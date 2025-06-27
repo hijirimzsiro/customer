@@ -49,7 +49,7 @@ export async function renderMenuPage(container) {
 
       const minusBtn = document.createElement('button');
       minusBtn.textContent = '-';
-      minusBtn.className = 'quantity-btn';
+      minusBtn.className = 'btn';
 
       const quantity = document.createElement('input');
       quantity.type = 'number';
@@ -59,7 +59,7 @@ export async function renderMenuPage(container) {
 
       const plusBtn = document.createElement('button');
       plusBtn.textContent = '+';
-      plusBtn.className = 'quantity-btn';
+      plusBtn.className = 'btn';
 
       minusBtn.onclick = () => {
         if (parseInt(quantity.value) > 1) {
