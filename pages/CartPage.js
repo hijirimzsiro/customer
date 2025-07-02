@@ -50,14 +50,14 @@ export function renderCartPage(container) {
 
   const backBtn = document.createElement('button');
   backBtn.textContent = '返回';
-  backBtn.onclick = () => window.location.href = '?page=order';
+  backBtn.onclick = () => window.location.href = '?page=menu';
 
   const submitBtn = document.createElement('button');
   submitBtn.textContent = '下單';
   submitBtn.onclick = async () => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     if (cart.length === 0) {
-      alert('購物車是空的唷！');
+      alert('購物車是空的喔~');
       return;
     }
 

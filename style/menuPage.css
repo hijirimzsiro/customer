@@ -1,4 +1,4 @@
-/* ✅ 整體背景與字型 */
+/* === ✅ 全域樣式：背景與字型 === */
 body {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ✅ 標題樣式 */
+/* === ✅ 標題樣式 === */
 .order-title {
   font-size: 24px;
   font-weight: bold;
@@ -15,7 +15,7 @@ body {
   text-align: center;
 }
 
-/* ✅ 商品列表容器 */
+/* === ✅ 商品區域容器（列表） === */
 .menu-container {
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@ body {
   width: 100%;
 }
 
-/* ✅ 商品卡片 */
+/* === ✅ 商品卡片樣式 === */
 .menu-card {
   display: flex;
   align-items: center;
@@ -41,7 +41,7 @@ body {
   gap: 24px;
 }
 
-/* ✅ 商品圖片 */
+/* === ✅ 商品圖片樣式 === */
 .menu-image {
   width: 100px;
   height: 100px;
@@ -49,7 +49,7 @@ body {
   flex: 0 0 100px;
 }
 
-/* ✅ 商品資訊 */
+/* === ✅ 商品資訊（內文）區塊 === */
 .menu-info {
   flex: 1;
   display: flex;
@@ -58,32 +58,35 @@ body {
   padding-top: 20px;
 }
 
+/* ✅ 商品名稱樣式 */
+.menu-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
 
-/* ✅ 商品價格 */
+/* ✅ 商品價格樣式 */
 .menu-price {
   font-size: 16px;
   color: #e76f51;
   font-weight: bold;
   white-space: nowrap;
-
   position: relative;
-  top: -16px;
-  /* ✅ 數字越大，字越往上 */
+  top: -16px; /* 字向上偏移 */
 }
 
+/* === ✅ 商品操作區塊（數量與按鈕） === */
 .menu-actions {
   flex: 2;
   display: flex;
   align-items: center;
-  gap: 200px;
-  /* 控制數量區與購物車按鈕的間距 */
+  gap: 200px;         /* 控制數量與按鈕的距離 */
   justify-content: flex-start;
-  /* 對齊靠左 */
   white-space: nowrap;
 }
 
-
-/* ✅ 加入購物車按鈕 */
+/* === ✅ 加入購物車按鈕 === */
 .cart-btn {
   background-color: #f4a261;
   color: white;
@@ -101,10 +104,7 @@ body {
   background-color: #e76f51;
 }
 
-
-
-/* ✅ 下一步按鈕 */
-/* ✅ 下一步（前往購物車）按鈕（與 cart-btn 統一風格） */
+/* === ✅ 下一步按鈕（去購物車） === */
 .next-btn {
   background-color: #f4a261;
   color: white;
@@ -117,10 +117,9 @@ body {
   white-space: nowrap;
   transition: background-color 0.3s ease;
 
-  /* ✅ 置中顯示在最下方 */
+  /* 置中顯示在頁面底部 */
   display: block;
   margin: 40px auto 60px;
-  /* top, auto-center, bottom space */
   text-align: center;
 }
 
@@ -128,25 +127,16 @@ body {
   background-color: #e76f51;
 }
 
-/* ✅ 品項名稱字體縮小設定 */
-.menu-info h3 {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 0;
-  color: #333;
-}
-
-/* === 數量控制元件（共用） === */
-
+/* === ✅ 數量控制元件 === */
 .quantity-input {
   display: inline-flex;
   align-items: center;
   border: 1px solid #ccc;
-  border-radius: 6px; /* 增加圓角 */
+  border-radius: 6px;
   overflow: hidden;
   background: white;
   height: 32px;
-  gap: 8px; /* 增加按鈕與數字顯示的間距 */
+  gap: 8px;
 }
 
 .quantity-input .btn {
@@ -160,7 +150,7 @@ body {
 }
 
 .quantity-input .btn:hover {
-  background-color: #e76f51; /* 橘色hover */
+  background-color: #e76f51;
 }
 
 .quantity-input input {
@@ -173,13 +163,14 @@ body {
   padding: 0;
 }
 
-/* 去除數字 input 上下箭頭 */
+/* ✅ 移除 input 數字欄上下箭頭（Chrome） */
 .quantity-input input::-webkit-outer-spin-button,
 .quantity-input input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-·.quantity-input input[type=number] {
+/* ✅ 移除 input 數字欄上下箭頭（Firefox） */
+.quantity-input input[type=number] {
   -moz-appearance: textfield;
 }
