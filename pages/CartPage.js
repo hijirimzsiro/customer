@@ -81,6 +81,11 @@ export function renderCartPage(container) {
       const result = await response.json();
       localStorage.setItem('orderNumber', result.order_id); // ✅ 儲存訂單編號
       localStorage.removeItem('cart');
+      if (result.order_id) {
+        localStorage.setItem('latestOrderId', result.order_id);
+      } else {
+        console.warn('⚠️ 後端未回傳訂單編號');
+      }
       window.location.href = '?page=confirm';
     } catch (err) {
       alert("發送訂單失敗，請稍後再試！");

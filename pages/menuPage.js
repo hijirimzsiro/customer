@@ -79,8 +79,13 @@ export async function renderMenuPage(container) {
       addButton.innerHTML = '🛒 加入購物車';
       addButton.className = 'cart-btn';
       addButton.onclick = () => {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const qty = parseInt(quantity.value);
+        if (qty <= 0 || isNaN(qty)) {
+          alert('請選擇數量');
+          return;
+        }
+
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const existingItem = cart.find(i => i.menu_id === item.menu_id);
 
         if (existingItem) {
@@ -88,8 +93,13 @@ export async function renderMenuPage(container) {
         } else {
           cart.push({ ...item, quantity: qty });
         }
+
         localStorage.setItem('cart', JSON.stringify(cart));
-        alert('✅ 已加入購物車');
+
+        // ✅ 顯示名稱與數量
+        alert(`${item.name} x${qty} 已加入購物車`);
+        // ✅ 清除數量輸入欄
+        quantity.value = 0;
       };
 
       actions.appendChild(quantityBox);
@@ -99,7 +109,7 @@ export async function renderMenuPage(container) {
       menuArea.appendChild(card);
     });
 
-    // ✅ 新增：底部「前往購物車」按鈕
+    // ✅ 底部「前往購物車」按鈕
     const goToCart = document.createElement('button');
     goToCart.textContent = '前往購物車';
     goToCart.className = 'next-btn';

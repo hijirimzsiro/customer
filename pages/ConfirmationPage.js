@@ -12,14 +12,17 @@ export function renderConfirmationPage(container) {
   sub.className = 'confirm-sub';
   container.appendChild(sub);
 
+  // ✅ 從 localStorage 取得當日訂單號碼（例如：4）
+  const dailyNumber = localStorage.getItem('orderNumber');
+
   const numberWrapper = document.createElement('div');
   numberWrapper.className = 'order-number';
-  numberWrapper.textContent = '1'; // ✅ 只有數字
+  numberWrapper.textContent = dailyNumber || '?';
   container.appendChild(numberWrapper);
 
   const unit = document.createElement('div');
   unit.className = 'order-unit';
-  unit.textContent = '號'; // ✅ 額外顯示在圓圈下方
+  unit.textContent = '號';
   container.appendChild(unit);
 
   const wait = document.createElement('p');
@@ -30,6 +33,6 @@ export function renderConfirmationPage(container) {
   const btn = document.createElement('button');
   btn.className = 'next-btn';
   btn.textContent = '我要加點';
-  btn.onclick = () => window.location.href = '?page=order';
+  btn.onclick = () => window.location.href = '?page=menu';
   container.appendChild(btn);
 }
