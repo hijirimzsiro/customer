@@ -61,32 +61,44 @@ export function renderCartPage(container) {
       return;
     }
 
+    const store_name = new URLSearchParams(window.location.search).get("store");
+    if (!store_name) {
+      alert("⚠️ 未指定分店，請確認網址中包含 ?store=xxx");
+      return;
+    }
+
     const items = cart.map(item => ({
-      menu_id: item.menu_id, 
+      menu_id: item.menu_id,
       quantity: item.quantity
     }));
 
     try {
-   const response = await fetch("http://127.0.0.1:5000/public_place_order", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({ items })
-});
-
+      const response = await fetch("http://127.0.0.1:5000/public_place_order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ store_name, items })
+      });
 
       if (!response.ok) throw new Error("送出訂單失敗");
 
       const result = await response.json();
-      localStorage.setItem('orderNumber', result.order_id); // ✅ 儲存訂單編號
+      if (!result.order_number) {
+        alert("⚠️ 後端未傳回訂單編號，請聯絡店家");
+        return;
+      }
+
+      localStorage.setItem('orderNumber', result.order_number); // ✅ 儲存流水號
       localStorage.removeItem('cart');
+
       if (result.order_id) {
         localStorage.setItem('latestOrderId', result.order_id);
       } else {
-        console.warn('⚠️ 後端未回傳訂單編號');
+        console.warn('⚠️ 後端未回傳訂單 ID');
       }
-      window.location.href = '?page=confirm';
+
+      window.location.href = '?page=confirm&store=' + store_name;
     } catch (err) {
       alert("發送訂單失敗，請稍後再試！");
       console.error("送出訂單錯誤:", err);
@@ -103,7 +115,11 @@ export function renderCartPage(container) {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     total.textContent = `小計: $${totalAmount}`;
-    refresh();
+
+    // 安全呼叫 refresh
+    if (typeof refresh === 'function') {
+      refresh();
+    }
   }
 
   updateTotal();
