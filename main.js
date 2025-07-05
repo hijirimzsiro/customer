@@ -19,23 +19,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const search = new URLSearchParams(window.location.search);
-  const page = search.get('page') || 'home'; // 預設顯示 home 頁面
+  const page = search.get('page');
 
-  // 清除原有樣式
-  document.querySelectorAll('link[rel=stylesheet]').forEach(link => {
-    if (link.href.includes('Page.css')) link.remove();
-  });
+  // ✅ 沒帶 page 時，自動導向 menu 頁
+  if (!page) {
+    window.location.replace('?page=menu');
+    return;
+  }
 
-  // 動態載入 CSS 並渲染對應頁面
+  // ✅ 頁面存在才執行渲染
   if (pages[page]) {
     const { render, css } = pages[page];
+
+    // 清除原有 CSS 樣式
+    document.querySelectorAll('link[rel=stylesheet]').forEach(link => {
+      if (link.href.includes('Page.css')) link.remove();
+    });
+
+    // 動態載入對應頁面的 CSS
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = `style/${css}`;
     document.head.appendChild(link);
+
+    // 渲染對應頁面
     render(app);
   } else {
-    console.warn(`未定義的頁面: ${page}，自動導向 home`);
-    window.location.href = '?page=home';
+    console.warn(`未定義的頁面: ${page}，自動導向 menu`);
+    window.location.href = '?page=menu';
   }
 });

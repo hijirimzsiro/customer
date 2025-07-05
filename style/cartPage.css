@@ -1,5 +1,6 @@
-/* === 購物車頁樣式 === */
-
+/* =======================
+   🛒 購物車頁整體樣式
+========================== */
 .cart-page-container {
   background-color: #fff9e6;
   min-height: 100vh;
@@ -12,8 +13,8 @@
 
 .cart-box {
   background: white;
-  border-radius: 16px;
   border: 1px solid #d8bfa2;
+  border-radius: 16px;
   padding: 20px;
   max-width: 900px;
   width: 100%;
@@ -28,6 +29,9 @@
   margin-bottom: 12px;
 }
 
+/* =======================
+   🧾 購物車列表與品項樣式
+========================== */
 .cart-header {
   display: flex;
   justify-content: space-between;
@@ -91,60 +95,9 @@
   padding: 2px 26px;
 }
 
-/* ✅ 統一按鈕樣式 */
-.cart-btn-group {
-  margin-top: 16px;
-  background-color: #fde2c3;
-  padding: 16px;
-  border-radius: 0 0 16px 16px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.cart-btn-group button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  height: 48px;
-  line-height: 48px;
-  text-align: center;
-
-  border: 3px solid #a47551;
-  padding: 0 20px;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.cart-btn-group button:first-child,
-.cart-btn-group button:last-child {
-  border: none;
-}
-
-
-.cart-btn-group button:first-child {
-  background-color: #999;
-}
-
-.cart-btn-group button:first-child:hover {
-  background-color: #777;
-}
-
-.cart-btn-group button:last-child {
-  background-color: #f4a261;
-}
-
-.cart-btn-group button:last-child:hover {
-  background-color: #e76f51;
-}
-
-
-/* === 數量控制元件（共用） === */
-
+/* =======================
+   🧮 數量調整元件樣式（共用）
+========================== */
 .quantity-input {
   display: inline-flex;
   align-items: center;
@@ -180,6 +133,7 @@
   padding: 0;
 }
 
+/* 移除數字 input 的上下箭頭 */
 .quantity-input input::-webkit-outer-spin-button,
 .quantity-input input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -191,23 +145,71 @@
 }
 
 
-/* === 商品卡片頁樣式 === */
+/* =======================
+   🔘 購物車按鈕群組樣式
+========================== */
+.cart-btn-group {
+  margin-top: 16px;
+  background-color: #fde2c3;
+  padding: 16px;
+  border-radius: 0 0 16px 16px;
+  display: flex;
+  justify-content: space-between;
+}
 
+.cart-btn-group button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  color: white;
+  border: 6px solid #a47551;
+  background-color: transparent;
+}
+
+/* 左右兩側按鈕特殊樣式 */
+.cart-btn-group button:first-child {
+  background-color: #999;
+  border: none;
+}
+.cart-btn-group button:first-child:hover {
+  background-color: #777;
+}
+
+.cart-btn-group button:last-child {
+  background-color: #f4a261;
+  border: none;
+}
+.cart-btn-group button:last-child:hover {
+  background-color: #e76f51;
+}
+
+
+/* =======================
+   🍪 商品卡片樣式（菜單頁用）
+========================== */
 .menu-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   max-width: 900px;
+  width: 100%;
   padding: 16px 24px;
-  background-color: #ffffff;
-  border: 2px solid #c9a176;
+  border: 6px solid #c9a176 !important;
+  background-color: white;
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   gap: 24px;
 }
 
-/* ✅ 左側圖片欄 */
 .menu-image {
   width: 100px;
   height: 100px;
@@ -215,7 +217,6 @@
   flex: 0 0 100px;
 }
 
-/* ✅ 中間：品名 */
 .menu-info {
   flex: 1;
   display: flex;
@@ -223,45 +224,40 @@
   justify-content: center;
 }
 
-/* ✅ 右側：價格＋數量＋按鈕 */
 .menu-actions {
   flex: 2;
   display: flex;
   align-items: center;
-  gap: 16px;
   justify-content: space-between;
+  gap: 16px;
   white-space: nowrap;
 }
 
-/* ✅ 價格文字 */
 .menu-price {
   font-size: 16px;
-  color: #e76f51;
   font-weight: bold;
+  color: #e76f51;
   white-space: nowrap;
 }
 
-/* ✅ 加入購物車按鈕（統一風格） */
+/* 統一風格的「加入購物車」按鈕 */
 .cart-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-
   height: 48px;
   line-height: 48px;
-  text-align: center;
-
-  background-color: #f4a261;
-  border: 3px solid #a47551;
   padding: 0 20px;
   font-size: 16px;
   font-weight: bold;
-  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 15px;
   cursor: pointer;
-  transition: 0.3s;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  background-color: #f4a261;
+  border: 6px solid #a47551;
   white-space: nowrap;
+  transition: 0.3s;
 }
 
 .cart-btn:hover {
