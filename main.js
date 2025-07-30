@@ -19,15 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const search = new URLSearchParams(window.location.search);
-  const page = search.get('page');
+  const page = search.get('page') || 'home'; // 預設首頁
 
-  // ✅ 沒帶 page 時，自動導向 menu 頁
-  if (!page) {
-    window.location.replace('?page=menu');
-    return;
-  }
-
-  // ✅ 頁面存在才執行渲染
+  // 頁面存在才執行渲染
   if (pages[page]) {
     const { render, css } = pages[page];
 
@@ -45,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 渲染對應頁面
     render(app);
   } else {
-    console.warn(`未定義的頁面: ${page}，自動導向 menu`);
-    window.location.href = '?page=menu';
+    console.warn(`未定義的頁面: ${page}，自動導向 home`);
+    window.location.href = '?page=home';
   }
 });

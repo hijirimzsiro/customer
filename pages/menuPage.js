@@ -115,7 +115,7 @@ export async function renderMenuPage(container) {
   menuArea.className = 'menu-container';
   container.appendChild(menuArea);
 
-  const quantityInputs = []; // ✅ 儲存每一項商品的 {item, input}
+  const quantityInputs = []; // 儲存每一項商品的 {item, input}
 
   try {
     const response = await fetch('http://127.0.0.1:5000/public_menus');
@@ -126,15 +126,32 @@ export async function renderMenuPage(container) {
 
     menu.forEach(item => {
       const card = createMenuCard(item);
+      const input = card.querySelector('input'); // 抓出 input 元件
       menuArea.appendChild(card);
-
-      quantityInputs.push({ item, input: quantity });
+      quantityInputs.push({ item, input }); // 儲存商品與輸入欄位
     });
 
-    // 前往購物車按鈕
+    // 前往購物車按鈕（會收集所有數量 > 0 的品項）
     const goToCart = createButton('前往購物車', 'next-btn', () => {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      quantityInputs.forEach(({ item, input }) => {
+        const qty = parseInt(input.value);
+        if (qty > 0 && !isNaN(qty)) {
+          const existing = cart.find(i => i.menu_id === item.menu_id);
+          if (existing) {
+            existing.quantity += qty;
+          } else {
+            cart.push({ ...item, quantity: qty });
+          }
+          input.value = 0; // 清空數量
+        }
+      });
+
+      localStorage.setItem('cart', JSON.stringify(cart));
       window.location.href = '?page=cart';
     });
+
     container.appendChild(goToCart);
 
   } catch (err) {
