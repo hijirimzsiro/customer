@@ -115,6 +115,8 @@ export async function renderMenuPage(container) {
   menuArea.className = 'menu-container';
   container.appendChild(menuArea);
 
+  const quantityInputs = []; // ✅ 儲存每一項商品的 {item, input}
+
   try {
     const response = await fetch('http://127.0.0.1:5000/public_menus');
     if (!response.ok) throw new Error('Load failed');
@@ -125,6 +127,8 @@ export async function renderMenuPage(container) {
     menu.forEach(item => {
       const card = createMenuCard(item);
       menuArea.appendChild(card);
+
+      quantityInputs.push({ item, input: quantity });
     });
 
     // 前往購物車按鈕

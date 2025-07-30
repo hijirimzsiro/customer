@@ -1,5 +1,15 @@
 import { createCartList } from '../components/CartList.js';
 
+// ✅ 公用方法：取得當前分店名稱（從網址或 localStorage）
+function getCurrentStoreName() {
+  const urlStore = new URLSearchParams(window.location.search).get("store");
+  if (urlStore) {
+    localStorage.setItem("store_name", urlStore); // 同步儲存
+    return urlStore;
+  }
+  return localStorage.getItem("store_name");
+}
+
 export function renderCartPage(container) {
   container.innerHTML = '';
   container.className = 'cart-page-container';
@@ -50,7 +60,14 @@ export function renderCartPage(container) {
 
   const backBtn = document.createElement('button');
   backBtn.textContent = '返回';
-  backBtn.onclick = () => window.location.href = '?page=menu';
+  backBtn.onclick = () => {
+    const store = getCurrentStoreName();
+    if (store) {
+      window.location.href = `?page=menu&store=${encodeURIComponent(store)}`;
+    } else {
+      window.location.href = '?page=menu';
+    }
+  };
 
   const submitBtn = document.createElement('button');
   submitBtn.textContent = '下單';
@@ -61,9 +78,9 @@ export function renderCartPage(container) {
       return;
     }
 
-    const store_name = new URLSearchParams(window.location.search).get("store");
+    const store_name = getCurrentStoreName();
     if (!store_name) {
-      alert("⚠️ 未指定分店，請確認網址中包含 ?store=xxx");
+      alert("⚠️ 未指定分店，請重新選擇分店");
       return;
     }
 
@@ -89,7 +106,7 @@ export function renderCartPage(container) {
         return;
       }
 
-      localStorage.setItem('orderNumber', result.order_number); // ✅ 儲存流水號
+      localStorage.setItem('orderNumber', result.order_number);
       localStorage.removeItem('cart');
 
       if (result.order_id) {
@@ -98,7 +115,7 @@ export function renderCartPage(container) {
         console.warn('⚠️ 後端未回傳訂單 ID');
       }
 
-      window.location.href = '?page=confirm&store=' + store_name;
+      window.location.href = `?page=confirm&store=${encodeURIComponent(store_name)}`;
     } catch (err) {
       alert("發送訂單失敗，請稍後再試！");
       console.error("送出訂單錯誤:", err);
@@ -116,7 +133,6 @@ export function renderCartPage(container) {
     const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     total.textContent = `小計: $${totalAmount}`;
 
-    // 安全呼叫 refresh
     if (typeof refresh === 'function') {
       refresh();
     }
