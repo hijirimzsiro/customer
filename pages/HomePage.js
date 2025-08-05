@@ -18,7 +18,8 @@ export function renderHomePage(container) {
   storeSelect.className = 'store-select';
 
   // 🚀 發送 API 取得分店清單
-  fetch("http://127.0.0.1:5000/stores")
+//  fetch("http://127.0.0.1:5000/stores")
+  fetch("http://172.20.10.4:5000/stores")
     .then(res => res.json())
     .then(data => {
       const storeNames = data.store_names || [];

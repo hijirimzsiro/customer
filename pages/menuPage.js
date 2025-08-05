@@ -1,4 +1,4 @@
-// menuPage.js
+import { apiBaseUrl } from "../config.js";
 
 // 建立按鈕元件
 function createButton(text, className, onClick) {
@@ -118,7 +118,8 @@ export async function renderMenuPage(container) {
   const quantityInputs = []; // 儲存每一項商品的 {item, input}
 
   try {
-    const response = await fetch('http://127.0.0.1:5000/public_menus');
+//    const response = await fetch('http://127.0.0.1:5000/public_menus');
+    const response = await fetch(`${apiBaseUrl}/public_menus`);
     if (!response.ok) throw new Error('Load failed');
 
     const result = await response.json();

@@ -1,4 +1,5 @@
 import { createCartList } from '../components/CartList.js';
+import { apiBaseUrl } from "../config.js";
 
 // ✅ 公用方法：取得當前分店名稱（從網址或 localStorage）
 function getCurrentStoreName() {
@@ -90,7 +91,8 @@ export function renderCartPage(container) {
     }));
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/public_place_order", {
+//      const response = await fetch("http://127.0.0.1:5000/public_place_order", {
+      const response = await fetch(`${apiBaseUrl}/public_place_order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
