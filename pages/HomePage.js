@@ -25,11 +25,10 @@ export function renderHomePage(container) {
 
   let isStoreValid = false; // ❗ 用來記錄 storeFromUrl 是否有效
 
-// 🚀 發送 API 取得分店清單
-fetch(`https://9b67fc7df921.ngrok-free.app/stores`)
+fetch(`${apiBaseUrl}/stores`)
   .then(res => {
     if (!res.ok) {
-      throw new Error(`❌ HTTP 錯誤狀態碼: ${res.status}`);
+      throw new Error(`❌ HTTP 錯誤：${res.status}`);
     }
 
     const contentType = res.headers.get("content-type");
@@ -40,7 +39,10 @@ fetch(`https://9b67fc7df921.ngrok-free.app/stores`)
     return res.json();
   })
   .then(data => {
+    console.log("✅ 成功取得資料：", data);
     const storeNames = data.store_names || [];
+    console.log("📦 分店列表：", storeNames);
+
     if (storeNames.length === 0) {
       alert("⚠️ 找不到可用分店，請聯絡店家！");
       return;
@@ -49,31 +51,17 @@ fetch(`https://9b67fc7df921.ngrok-free.app/stores`)
     // 建立選項
     storeNames.forEach(name => {
       const option = document.createElement('option');
-      option.value = name.trim(); // 去除空白
+      option.value = name.trim();
       option.textContent = name;
       storeSelect.appendChild(option);
     });
-
-    // 嘗試設定網址中的 store 為預設值
-    if (storeFromUrl) {
-      // 強制比對：不分全形/半形、空白、大小寫
-      const matchedStore = storeNames.find(name => name.trim() === storeFromUrl.trim());
-      if (matchedStore) {
-        storeSelect.value = matchedStore;
-        isStoreValid = true;
-        localStorage.setItem("store_name", matchedStore);
-      } else {
-        storeSelect.selectedIndex = -1;
-        localStorage.removeItem("store_name");
-      }
-    } else {
-      storeSelect.selectedIndex = -1;
-    }
   })
-  .catch(err => {
-    alert("❌ 發生錯誤：\n" + err.message);
-    console.error("Fetch 錯誤：", err);
+  .catch(error => {
+    alert("❌ 發生錯誤：\n" + error.message);
+    console.error("Fetch 錯誤：", error);
   });
+
+
 
 
   // 使用者變更選擇時儲存
