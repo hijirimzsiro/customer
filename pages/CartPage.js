@@ -1,5 +1,5 @@
 import { createCartList } from '../components/CartList.js';
-import { apiBaseUrl } from "../config.js";
+import { apiBaseUrl } from "../settings.js";
 
 // ✅ 公用方法：取得當前分店名稱（從網址或 localStorage）
 function getCurrentStoreName() {

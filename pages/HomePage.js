@@ -1,3 +1,5 @@
+import { apiBaseUrl } from "../settings.js";
+
 export function renderHomePage(container) {
   container.innerHTML = '';
 
@@ -16,34 +18,55 @@ export function renderHomePage(container) {
 
   const storeSelect = document.createElement('select');
   storeSelect.className = 'store-select';
+  storeSelect.id = 'storeSelect';
 
-  // 🚀 發送 API 取得分店清單
-//  fetch("http://127.0.0.1:5000/stores")
-  fetch("http://172.20.10.4:5000/stores")
-    .then(res => res.json())
-    .then(data => {
-      const storeNames = data.store_names || [];
-      if (storeNames.length === 0) {
-        alert("⚠️ 找不到可用分店，請聯絡店家！");
-        return;
-      }
+  const params = new URLSearchParams(window.location.search);
+  const storeFromUrl = params.get("store");
 
-      // 加入選項
-      storeNames.forEach(name => {
-        const option = document.createElement('option');
-        option.value = name;
-        option.textContent = name;
-        storeSelect.appendChild(option);
-      });
+  let isStoreValid = false; // ❗ 用來記錄 storeFromUrl 是否有效
 
-      // 儲存預設第一間
-      localStorage.setItem("store_name", storeNames[0]);
+// 🚀 發送 API 取得分店清單
+fetch(`${apiBaseUrl}/stores`)
+  .then(res => res.json())
+  .then(data => {
+    const storeNames = data.store_names || [];
+    if (storeNames.length === 0) {
+      alert("⚠️ 找不到可用分店，請聯絡店家！");
+      return;
+    }
+
+    // 建立選項
+    storeNames.forEach(name => {
+      const option = document.createElement('option');
+      option.value = name.trim(); // 去除空白
+      option.textContent = name;
+      storeSelect.appendChild(option);
     });
 
-  // ⏺️ 選擇分店變更時同步儲存
+    // 嘗試設定網址中的 store 為預設值
+    if (storeFromUrl) {
+      // 強制比對：不分全形/半形、空白、大小寫
+      const matchedStore = storeNames.find(name => name.trim() === storeFromUrl.trim());
+      if (matchedStore) {
+        storeSelect.value = matchedStore;
+        isStoreValid = true;
+        localStorage.setItem("store_name", matchedStore);
+      } else {
+        storeSelect.selectedIndex = -1;
+        localStorage.removeItem("store_name");
+      }
+    } else {
+      storeSelect.selectedIndex = -1;
+    }
+  });
+
+  // 使用者變更選擇時儲存
   storeSelect.onchange = () => {
     const selected = storeSelect.value;
-    localStorage.setItem("store_name", selected);
+    if (selected) {
+      isStoreValid = true;
+      localStorage.setItem("store_name", selected);
+    }
   };
 
   storeSection.appendChild(storeLabel);
@@ -54,41 +77,29 @@ export function renderHomePage(container) {
   const buttonGroup = document.createElement('div');
   buttonGroup.className = 'button-group';
 
+  function handleNav(targetPage) {
+    const store = storeSelect.value;
+    if (!store) {
+      alert("❗ 請選擇有效分店後再繼續操作！");
+      return;
+    }
+    window.location.href = `?page=${targetPage}&store=${encodeURIComponent(store)}`;
+  }
+
   const orderBtn = document.createElement('button');
   orderBtn.textContent = '開始點餐';
   orderBtn.className = 'nav-button';
-  orderBtn.onclick = () => {
-    const store = storeSelect.value;
-    if (!store) {
-      alert("請先選擇分店");
-      return;
-    }
-    window.location.href = `?page=menu&store=${encodeURIComponent(store)}`;
-  };
+  orderBtn.onclick = () => handleNav("menu");
 
   const cartBtn = document.createElement('button');
   cartBtn.textContent = '查看購物車';
   cartBtn.className = 'nav-button';
-  cartBtn.onclick = () => {
-    const store = storeSelect.value;
-    if (!store) {
-      alert("請先選擇分店");
-      return;
-    }
-    window.location.href = `?page=cart&store=${encodeURIComponent(store)}`;
-  };
+  cartBtn.onclick = () => handleNav("cart");
 
   const statusBtn = document.createElement('button');
   statusBtn.textContent = '查看訂單狀態';
   statusBtn.className = 'nav-button';
-  statusBtn.onclick = () => {
-    const store = storeSelect.value;
-    if (!store) {
-      alert("請先選擇分店");
-      return;
-    }
-    window.location.href = `?page=confirm&store=${encodeURIComponent(store)}`;
-  };
+  statusBtn.onclick = () => handleNav("confirm");
 
   buttonGroup.appendChild(orderBtn);
   buttonGroup.appendChild(cartBtn);

@@ -1,14 +1,13 @@
 import qrcode
+import urllib.parse
 
-# ✅ 網站的基本網址（你剛剛部署成功的網址）
-base_url = "https://yaoyaoproject-88907.web.app/?page=confirm&store="
+base_url = "https://yaoyaoproject-88907.web.app/?store="  # ❗ 不用 page 參數
 
-# ✅ 分店清單（你可以自行新增）
-stores = ["台北店", "高雄店", "淡水店", "台中店"]
+stores = ["台北店", "測試店", "淡水店", "芝山店"]
 
-# ✅ 產生每一間分店的 QRCode 圖檔
 for store in stores:
-    url = base_url + store
+    encoded_store = urllib.parse.quote(store)
+    url = base_url + encoded_store
     img = qrcode.make(url)
     img.save(f"{store}_QRCode.png")
 

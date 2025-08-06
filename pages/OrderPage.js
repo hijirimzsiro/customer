@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
-import { apiBaseUrl } from "../config.js";
+import { apiBaseUrl } from "../settings.js";
 
 const API_URL = apiBaseUrl;
 

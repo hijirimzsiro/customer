@@ -1,4 +1,4 @@
-import { apiBaseUrl } from "../config.js";
+import { apiBaseUrl } from "../settings.js";
 
 // 建立按鈕元件
 function createButton(text, className, onClick) {
