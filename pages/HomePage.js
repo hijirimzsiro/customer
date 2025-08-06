@@ -26,8 +26,19 @@ export function renderHomePage(container) {
   let isStoreValid = false; // ❗ 用來記錄 storeFromUrl 是否有效
 
 // 🚀 發送 API 取得分店清單
-fetch(`${apiBaseUrl}/stores`)
-  .then(res => res.json())
+fetch(`https://9b67fc7df921.ngrok-free.app/stores`)
+  .then(res => {
+    if (!res.ok) {
+      throw new Error(`❌ HTTP 錯誤狀態碼: ${res.status}`);
+    }
+
+    const contentType = res.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error("⚠️ 回傳的不是 JSON，可能是 HTML 錯誤頁或 CORS 擋下！");
+    }
+
+    return res.json();
+  })
   .then(data => {
     const storeNames = data.store_names || [];
     if (storeNames.length === 0) {
@@ -58,7 +69,12 @@ fetch(`${apiBaseUrl}/stores`)
     } else {
       storeSelect.selectedIndex = -1;
     }
+  })
+  .catch(err => {
+    alert("❌ 發生錯誤：\n" + err.message);
+    console.error("Fetch 錯誤：", err);
   });
+
 
   // 使用者變更選擇時儲存
   storeSelect.onchange = () => {
