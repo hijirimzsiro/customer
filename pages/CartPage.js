@@ -71,7 +71,6 @@ export function renderCartPage(container) {
   const itemHeader = document.createElement('span');
   itemHeader.style.flex = '1.9';
   itemHeader.style.textAlign = 'left';
-  itemHeader.style.paddingLeft = '12px';
   itemHeader.innerText = '品項';
 
   const quantityHeader = document.createElement('span');
@@ -82,7 +81,6 @@ export function renderCartPage(container) {
   const priceHeader = document.createElement('span');
   priceHeader.style.flex = '1.75';
   priceHeader.style.textAlign = 'right';
-  priceHeader.style.paddingRight = '32px';
   priceHeader.innerText = '價格';
 
   header.appendChild(itemHeader);
@@ -102,6 +100,7 @@ export function renderCartPage(container) {
   btnGroup.className = 'cart-btn-group';
 
   const backBtn = document.createElement('button');
+  backBtn.className = 'cart-back-btn';   // ✅ 獨立樣式
   backBtn.textContent = '返回';
   backBtn.onclick = () => {
     const store = getCurrentStoreName();
@@ -113,6 +112,7 @@ export function renderCartPage(container) {
   };
 
   const submitBtn = document.createElement('button');
+  submitBtn.className = 'cart-submit-btn'; // ✅ 獨立樣式
   submitBtn.textContent = '下單';
   submitBtn.onclick = async () => {
     let cart = readCart();

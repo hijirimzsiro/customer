@@ -1,4 +1,9 @@
-/* ✅ 頁面整體背景與標題 */
+/* 全域字型 */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 頁面背景與標題樣式 */
 .order-page-container {
   background-color: #fff9e6;
   min-height: 100vh;
@@ -14,7 +19,7 @@
   text-align: center;
 }
 
-/* ✅ 商品列表容器設定（置中＋寬度限制） */
+/* 商品列表容器 */
 .menu-container {
   display: flex;
   flex-direction: column;
@@ -25,7 +30,7 @@
   width: 100%;
 }
 
-/* ✅ 單一商品卡片樣式 */
+/* 商品卡片樣式 */
 .menu-card {
   display: flex;
   align-items: center;
@@ -40,15 +45,16 @@
   gap: 24px;
 }
 
-
-.menu-card img {
+/* 商品圖片 */
+.menu-card img,
+.menu-image {
   width: 100px;
   height: 100px;
   object-fit: contain;
-  margin-right: 10px;
   flex-shrink: 0;
 }
 
+/* 商品資訊欄 */
 .menu-card .info {
   flex: 2;
   display: flex;
@@ -58,6 +64,13 @@
   white-space: nowrap;
 }
 
+.menu-info {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .menu-card h3 {
   font-size: 20px;
   font-weight: bold;
@@ -65,13 +78,16 @@
   color: #333;
 }
 
-.menu-card p {
+.menu-card p,
+.menu-price {
   margin: 0;
-  color: #e76f51;
   font-weight: bold;
   font-size: 18px;
+  color: #e76f51;
+  white-space: nowrap;
 }
 
+/* 操作按鈕區域 */
 .menu-card .controls {
   display: flex;
   flex-direction: column;
@@ -87,98 +103,10 @@
   gap: 120px;
   justify-content: flex-start;
   white-space: nowrap;
-  transform: translateX(-30px); /* ← 向左偏移 */
+  transform: translateX(-30px);
 }
 
-
-.menu-info {
-  flex: 1.5;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.menu-price {
-  font-size: 16px;
-  color: #e76f51;
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-.menu-image {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  flex: 1;
-}
-
-.menu-info {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-
-/* ✅ 加入購物車按鈕（黃色 + 咖啡字 + 無邊框） */
-.cart-btn {
-  background-color: #f4a261;
-  /* ✅ 橘色主色 */
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.3s ease;
-}
-
-.cart-btn:hover {
-  background-color: #e76f51;
-  /* ✅ 深橘色 hover */
-}
-
-/* 🎯 想調整「加入購物車按鈕長度」，請修改這裡的 padding 或 font-size */
-/* 例如加寬長度 ➜ padding: 10px 28px; */
-
-/* ✅ 下一步（前往購物車）按鈕 */
-.next-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  /* 🎯 控制整顆按鈕大小的關鍵 */
-  height: 50px;
-  /* 🎯 按鈕高度 */
-  min-width: 140px;
-  /* 🎯 按鈕最小寬度 */
-  font-size: 18px;
-  /* 🎯 字體大小 */
-  font-weight: bold;
-  /* 🎯 字體粗細 */
-  padding: 8px 24px;
-  /* 🎯 內距會影響整體尺寸 */
-
-  background-color: #f4a261;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  display: block;
-  margin: 30px auto 0;
-  text-align: center;
-}
-
-.next-btn:hover {
-  background-color: #e76f51;
-}
-
-
-/* ✅ 數量控制元件樣式 */
+/* 數量控制元件 */
 .quantity-input {
   display: inline-flex;
   align-items: center;
@@ -199,26 +127,22 @@
   padding: 0;
 }
 
-/* ✅ 數字顯示（非 input） */
 .quantity-display {
   font-size: 14px;
   width: 32px;
   text-align: center;
 }
 
-/* ✅ 若使用 <input> 顯示數字，這裡控制樣式 */
 .quantity-input input {
   width: 28px;
   text-align: center;
   border: none;
   font-size: 1px;
-  /* 若沒用到 <input> 可忽略 */
   height: 100%;
   outline: none;
   padding: 0;
 }
 
-/* ✅ 去除數字 input 上下箭頭 */
 .quantity-input input::-webkit-outer-spin-button,
 .quantity-input input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -227,4 +151,47 @@
 
 .quantity-input input[type=number] {
   -moz-appearance: textfield;
+}
+
+/* 加入購物車按鈕 */
+.cart-btn {
+  background-color: #f4a261;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.cart-btn:hover {
+  background-color: #e76f51;
+}
+
+/* 前往購物車按鈕 */
+.next-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  min-width: 140px;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 24px;
+  background-color: #f4a261;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 30px auto 0;
+  text-align: center;
+}
+
+.next-btn:hover {
+  background-color: #e76f51;
 }

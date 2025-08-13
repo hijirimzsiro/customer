@@ -1,77 +1,135 @@
-.confirmation-container {
-  background-color: #fff9e6;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  box-sizing: border-box;
-  width: 100vw;
+/* 設定共用字型、色票、圓角與陰影 */
+:root {
+  --bg-page: #fff9e6;
+  --text-main: #4b2e1f;
+  --chip-bg: #fcebd3;
+  --chip-border: #e7c8a2;
+  --chip-text: #8d5c2c;
+  --btn-bg: #f4a261;
+  --btn-border: #d77e58;
+  --btn-bg-hover: #d77e58;
+
+  --radius-15: 15px;
+  --shadow-soft: 0 6px 12px rgba(0,0,0,0.08);
+
+  --space-x: 24px;
+  --space-x-sm: 16px;
 }
 
+/* 清除預設留白並套用背景色 */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-page);
+}
+
+/* 設定全域字型 */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 建立會在任何裝置置中的主容器 */
+.confirmation-container {
+  background-color: var(--bg-page);
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* 水平置中 */
+  justify-content: center;  /* 垂直置中 */
+  padding: 0 var(--space-x);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* 顯示主標題 */
 .confirm-title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
-  color: #4b2e1f;
-  margin-bottom: 10px;
+  color: var(--text-main);
+  margin: 0 0 12px;
   text-align: center;
 }
 
+/* 顯示副標與提示文字 */
 .confirm-sub,
 .confirm-wait {
   font-size: 16px;
-  color: #4b2e1f;
+  font-weight: 600;
+  color: var(--text-main);
   margin: 6px 0;
   text-align: center;
 }
 
+/* 呈現訂單號碼的圓形徽章 */
 .order-number {
-  background: #fcebd3;
-  width: 120px;
-  height: 120px;
+  background: var(--chip-bg);
+  width: clamp(110px, 10vw, 140px);
+  height: clamp(110px, 10vw, 140px);
   border-radius: 50%;
-  margin: 20px auto 6px;
+  margin: 28px auto 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
+  padding-top: 2px; /* 微調數字視覺置中 */
+  font-size: clamp(40px, 4.5vw, 56px);
   font-weight: bold;
-  color: #8d5c2c;
+  color: var(--chip-text);
+  border: 3px solid var(--chip-border);
+  box-shadow: var(--shadow-soft);
 }
 
+/* 顯示號碼單位 */
 .order-unit {
   font-size: 20px;
-  color: #8d5c2c;
-  margin-bottom: 12px;
+  font-weight: 600;
+  color: var(--chip-text);
+  margin-bottom: 14px;
   text-align: center;
 }
 
+/* 呈現「我要加點」的主動作按鈕 */
 .next-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  height: 48px;                 /* ⬅️ 比原本 60px 小一點 */
+  height: 48px;
   line-height: 48px;
   text-align: center;
-
-  background-color: #f4a261;
-  color: white;
-  padding: 0 16px;              /* ⬅️ 減少 padding */
-  font-size: 16px;              /* ⬅️ 保持字體不變 */
+  background-color: var(--btn-bg);
+  color: #ffffff;
+  padding: 0 20px;
+  font-size: 16px;
   font-weight: bold;
-  border: none;                 /* ⬅️ 無邊框 */
-  border-radius: 15px;
-  width: 180px;                 /* ⬅️ 比原本 220px 窄一點 */
+  border: 3px solid var(--btn-border);
+  border-radius: var(--radius-15);
+  width: 200px;
   cursor: pointer;
   transition: 0.3s;
-  box-shadow: none;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  margin-top: 20px;             /* ⬅️ 往下拉一點距離 */
+  margin-top: 28px;
 }
 
-.next-btn:hover {
-  background-color: #e76f51;
+/* 提供按鈕互動效果 */
+.next-btn:hover { background-color: var(--btn-bg-hover); }
+.next-btn:active { transform: scale(0.97); }
+
+/* 在較寬螢幕時微調圓形徽章與標題距離 */
+@media (min-width: 768px) {
+  .order-number { margin-top: 32px; }
+}
+
+/* 在手機上維持置中並調整尺寸與字重 */
+@media (max-width: 480px) {
+  .confirmation-container { padding: 0 var(--space-x-sm); }
+  .next-btn { width: 180px; }
+  .order-number {
+    width: 110px;
+    height: 110px;
+    font-size: 38px;
+  }
+  .confirm-sub,
+  .confirm-wait,
+  .order-unit { font-weight: 500; }
 }

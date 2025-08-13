@@ -1,4 +1,4 @@
-/* === ✅ 全域樣式：背景與字型 === */
+/* 全域背景與字型 */
 body {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* === ✅ 標題樣式 === */
+/* 標題文字 */
 .order-title {
   font-size: 24px;
   font-weight: bold;
@@ -15,7 +15,7 @@ body {
   text-align: center;
 }
 
-/* === ✅ 商品區域容器（列表） === */
+/* 商品列表容器 */
 .menu-container {
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@ body {
   width: 100%;
 }
 
-/* === ✅ 商品卡片樣式 === */
+/* 商品卡片外框 */
 .menu-card {
   display: flex;
   align-items: center;
@@ -35,13 +35,14 @@ body {
   max-width: 900px;
   padding: 20px 30px;
   background-color: #ffffff;
-  border: 2px solid #c9a176;
+  border: 3px solid #c9a176;
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   gap: 24px;
+  box-sizing: border-box;
 }
 
-/* === ✅ 商品圖片樣式 === */
+/* 商品圖片 */
 .menu-image {
   width: 100px;
   height: 100px;
@@ -49,7 +50,7 @@ body {
   flex: 0 0 100px;
 }
 
-/* === ✅ 商品資訊（內文）區塊 === */
+/* 商品文字資訊 */
 .menu-info {
   flex: 1;
   display: flex;
@@ -58,7 +59,6 @@ body {
   padding-top: 20px;
 }
 
-/* ✅ 商品名稱樣式 */
 .menu-info h3 {
   font-size: 20px;
   font-weight: bold;
@@ -66,34 +66,33 @@ body {
   color: #333;
 }
 
-/* ✅ 商品價格樣式 */
 .menu-price {
   font-size: 16px;
   color: #e76f51;
   font-weight: bold;
   white-space: nowrap;
   position: relative;
-  top: -16px; /* 字向上偏移 */
+  top: -16px;
 }
 
-/* === ✅ 商品操作區塊（數量與按鈕） === */
+/* 商品操作區 */
 .menu-actions {
   flex: 2;
   display: flex;
   align-items: center;
-  gap: 200px;         /* 控制數量與按鈕的距離 */
+  gap: 200px; /* 桌面版間距大 */
   justify-content: flex-start;
   white-space: nowrap;
 }
 
-/* === ✅ 加入購物車按鈕 === */
+/* 加入購物車按鈕 */
 .cart-btn {
   background-color: #f4a261;
   color: white;
   font-weight: bold;
   font-size: 16px;
   padding: 10px 20px;
-  border: none;
+  border: 3px solid #d77e58;
   border-radius: 12px;
   cursor: pointer;
   white-space: nowrap;
@@ -101,33 +100,15 @@ body {
 }
 
 .cart-btn:hover {
-  background-color: #e76f51;
+  background-color: #d77e58;
 }
 
-/* === ✅ 下一步按鈕（去購物車） === */
-.next-btn {
-  background-color: #f4a261;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  padding: 10px 24px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.3s ease;
-
-  /* 置中顯示在頁面底部 */
-  display: block;
-  margin: 40px auto 60px;
-  text-align: center;
+.add-to-cart:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
-.next-btn:hover {
-  background-color: #e76f51;
-}
-
-/* === ✅ 數量控制元件 === */
+/* 數量控制元件 */
 .quantity-input {
   display: inline-flex;
   align-items: center;
@@ -150,7 +131,7 @@ body {
 }
 
 .quantity-input .btn:hover {
-  background-color: #e76f51;
+  background-color: #fde2c3;
 }
 
 .quantity-input input {
@@ -163,14 +144,151 @@ body {
   padding: 0;
 }
 
-/* ✅ 移除 input 數字欄上下箭頭（Chrome） */
 .quantity-input input::-webkit-outer-spin-button,
 .quantity-input input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* ✅ 移除 input 數字欄上下箭頭（Firefox） */
 .quantity-input input[type=number] {
   -moz-appearance: textfield;
+}
+
+/* 下方吸附的總計區 */
+.sticky-summary {
+  position: sticky;
+  bottom: 0;
+  background: rgba(244, 162, 97, .30);
+  padding: 10px 16px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  align-items: center;
+  z-index: 50;
+  backdrop-filter: blur(2px);
+}
+
+.sticky-summary .sum-text {
+  color: #c91b00;
+  font-weight: 700;
+}
+
+/* 吸附區內的前往購物車按鈕 */
+.sticky-summary .sticky-cart-btn {
+  background-color: #f4a261;
+  border: 3px solid #d77e58;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.sticky-summary .sticky-cart-btn:hover {
+  background-color: #d77e58;
+}
+
+.sticky-summary .sticky-cart-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* 購物車數量徽章 */
+.sticky-summary .badge {
+  min-width: 22px;
+  height: 22px;
+  border-radius: 12px;
+  background: #fff;
+  color: #4b2e1f;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  border: 2px solid #ca622e;
+}
+
+/* ========== 📱 手機 / 平板 RWD ========== */
+@media (max-width: 1024px) {
+  .menu-actions {
+    gap: 40px; /* 平板縮小間距 */
+  }
+}
+
+@media (max-width: 768px) {
+  /* 手機：標題視覺置中更明確 */
+  .order-title {
+    margin-top: 10px;
+    font-size: 22px;
+    background-color: #fff3d4;
+    padding: 8px 0;
+    border-radius: 8px;
+  }
+
+  /* 手機容器左右保留空間 */
+  .menu-container {
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  /* 手機：圖片+文字同一排，操作區改到下一行並置中 */
+  .menu-card {
+    flex-direction: row;
+    align-items: center;
+    padding: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .menu-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .menu-info {
+    padding-top: 0;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .menu-actions {
+    width: 100%;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .cart-btn {
+    flex: 0 0 auto;
+    min-width: 120px;
+    font-size: 14px;
+    padding: 8px 12px;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .menu-card {
+    padding: 12px;
+  }
+
+  .menu-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .cart-btn {
+    min-width: 110px;
+    font-size: 13px;
+    padding: 6px 10px;
+  }
 }

@@ -1,105 +1,174 @@
-/* === 基本：維持你的既有配色與桌機版視覺 === */
+/* 頁面背景與字型 */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
-  background-color: #fff9e6; /* 黃色背景 */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff9e6;
   min-height: 100vh;
 }
 
-/* 整個頁面的集中區：確保桌機與手機看起來一致 */
+/* ===== 整頁垂直＋水平置中 ===== */
 .home-page {
-  padding: 72px 16px 24px;   /* 頂部留空，避免被右上角圖示遮住 */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;   /* 水平置中 */
+  align-items: center;       /* 垂直置中 */
+  box-sizing: border-box;
+  padding: 0 16px;
 }
 
 .home-main {
+  width: 100%;
   max-width: 720px;
-  margin: 0 auto;
   text-align: center;
 }
-
-/* 右上角功能列：固定在右上，不佔版面空間 */
-.top-bar {
-  position: fixed;
-  right: 12px;
-  top: 12px;
-  z-index: 100;
-}
-
-.top-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.icon-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  border: 3px solid #916752; /* 深棕色框線 */
-  background: #f4a261;       /* 橘色 */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: 0.2s;
-}
-.icon-btn:hover { filter: brightness(0.95); }
-.icon-svg { width: 22px; height: 22px; fill: #fff; }
 
 /* 標題 */
 .home-title {
   color: #4b2e1f;
   font-size: 28px;
   font-weight: bold;
-  margin: 28px 0 14px;
-}
-
-/* 分店選擇（置中） */
-.store-select-group {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 6px 12px;
   margin-bottom: 20px;
 }
 
-.store-label {
-  font-size: 18px;
-  color: #4b2e1f;
+/* 分店選擇區（置中容器） */
+.store-select-group {
+  display: flex;
+  flex-direction: column;     /* 垂直排列 */
+  align-items: center;        /* 水平置中 */
+  gap: 16px;                  /* 與按鈕的間距 */
+  width: 100%;
+  margin: 0 auto 24px;        /* 多一點呼吸 */
+  position: relative;
 }
 
-.store-select {
-  font-size: 16px;
-  padding: 8px 10px;
+/* --- 原生 select：保留可存取性，但平常隱藏 --- */
+.store-select.native-hidden {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+/* ===== 自訂下拉選單 ===== */
+.custom-select {
+  width: 220px;                /* 桌面固定與按鈕一致 */
+  max-width: 100%;
+  position: relative;
+}
+
+.custom-select__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;     /* 水平置中文字 */
+  position: relative;          /* 讓箭頭絕對定位的基準 */
+  width: 100%;
+  height: 44px;
+  padding: 10px 40px;           /* 左右對稱，避免文字偏移 */
   border-radius: 8px;
   border: 2px solid #916752;
   background: #fff;
-  min-width: 200px;
+  color: #4b2e1f;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  cursor: pointer;
+  transition: box-shadow .2s, border-color .2s;
+  box-sizing: border-box;
 }
 
-/* 叫號提示卡（有資料才出現） */
+.custom-select__toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(215, 126, 88, 0.2);
+}
+
+.custom-select__arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23916752' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 下拉菜單（寬度與上方框一致） */
+.custom-select__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 2px solid #916752;
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.08);
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  z-index: 5;
+  max-height: 260px;
+  overflow-y: auto;
+  box-sizing: border-box;      /* 包含邊框，防止寬度溢出 */
+}
+
+/* 菜單項目：全部置中 */
+.custom-select__option {
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 18px;
+  color: #4b2e1f;
+  line-height: 1.6;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.custom-select__option:hover,
+.custom-select__option[aria-selected="true"] {
+  background: #f4a261; /* 跟按鈕背景一致 */
+  color: #ffffff;      /* 文字改成白色 */
+}
+
+/* 叫號提示卡片 */
 .order-hint-card {
   max-width: 640px;
   margin: 8px auto 0;
   padding: 12px 14px;
-  border: 2px solid #916752;
+  border: 2px solid #ca622e;
   border-radius: 12px;
   background: #fff;
   color: #4b2e1f;
   text-align: center;
 }
-.order-hint-title { font-weight: 800; font-size: 18px; margin-bottom: 8px; }
-.order-hint-sub { font-size: 14px; opacity: .85; margin-top: 6px; }
 
-/* 主行動按鈕 */
+.order-hint-title {
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.order-hint-sub {
+  font-size: 14px;
+  opacity: .85;
+  margin-top: 6px;
+}
+
+/* 主功能按鈕區（置中、直向） */
 .button-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 22px;
+  gap: 16px;
   margin-top: 24px;
 }
 
+/* 統一按鈕風格（指定色系） */
 .nav-button {
   display: inline-flex;
   align-items: center;
@@ -108,7 +177,7 @@ body {
   line-height: 60px;
   text-align: center;
   background-color: #f4a261;
-  border: 3px solid #916752;
+  border: 3px solid #d77e58;
   padding: 8px 24px;
   font-size: 20px;
   font-weight: bold;
@@ -119,7 +188,11 @@ body {
   transition: 0.2s;
   box-shadow: none;
 }
-.nav-button:hover { background-color: #e76f51; }
+
+.nav-button:hover {
+  background-color: #d77e58;
+}
+
 .nav-button.small {
   height: 44px;
   line-height: 44px;
@@ -127,27 +200,56 @@ body {
   width: 200px;
 }
 
-/* === 手機優先：維持相同版面，只縮放尺寸與間距 === */
+/* 手機版樣式 */
 @media (max-width: 480px) {
-  .home-page { padding: 68px 12px 24px; }
-  .home-main { max-width: 420px; }
+  .home-title {
+    font-size: 24px;
+  }
 
-  .home-title { font-size: 24px; margin-top: 12px; }
-  .store-label { font-size: 16px; }
-  .store-select { font-size: 16px; min-width: 0; width: 72vw; }
+  .custom-select {
+    width: 72vw;              /* 與按鈕寬度一致 */
+    max-width: 360px;
+    min-width: 240px;
+  }
 
-  .order-hint-title { font-size: 16px; }
-  .order-hint-sub { font-size: 13px; }
+  .custom-select__toggle {
+    height: 48px;
+    font-size: 18px;
+  }
 
-  .nav-button { width: 72vw; height: 56px; line-height: 56px; font-size: 18px; }
-  .nav-button.small { width: 62vw; height: 44px; line-height: 44px; font-size: 16px; }
+  .custom-select__menu {
+    max-height: 300px;
+  }
 
-  .icon-btn { width: 40px; height: 40px; border-radius: 10px; }
+  .nav-button {
+    width: 72vw;
+    height: 56px;
+    line-height: 56px;
+    font-size: 18px;
+  }
+
+  .nav-button.small {
+    width: 62vw;
+    height: 44px;
+    line-height: 44px;
+    font-size: 16px;
+  }
 }
 
-/* 平板：稍放大觸控區 */
+/* 平板樣式 */
 @media (min-width: 481px) and (max-width: 1024px) {
-  .home-main { max-width: 640px; }
-  .nav-button { width: 260px; height: 64px; line-height: 64px; font-size: 22px; }
-  .store-select { font-size: 18px; }
+  .home-main {
+    max-width: 640px;
+  }
+
+  .custom-select {
+    width: 260px;
+  }
+
+  .nav-button {
+    width: 260px;
+    height: 64px;
+    line-height: 64px;
+    font-size: 22px;
+  }
 }
