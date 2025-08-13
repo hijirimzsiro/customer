@@ -10,32 +10,29 @@ function OrderPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API_URL}/public_menus`)
-      .then((res) => res.json())
-      .then((data) => {
-        setMenuItems(data.menus || []);
+    // ✅ GET 加 query 參數避免預檢
+    fetch(`${API_URL}/public_menus?ngrok-skip-browser-warning=true`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const ct = res.headers.get("content-type") || "";
+        if (!ct.includes("application/json")) {
+          throw new Error("Response is not JSON.");
+        }
+        return res.json();
       })
-      .catch((error) => console.error("❌ 無法取得菜單：", error));
+      .then((data) => setMenuItems(data.menus || []))
+      .catch((error) => console.error("無法取得菜單：", error));
   }, []);
 
   const handleAddToCart = (item) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const existing = cart.find((i) => i.menu_id === item.menu_id);
 
-    if (existing) {
-      existing.quantity += 1;
-    } else {
-      cart.push({
-        menu_id: item.menu_id,
-        name: item.name,
-        price: item.price,
-        quantity: 1,
-        imgUrl: item.imgUrl
-      });
-    }
+    if (existing) existing.quantity += 1;
+    else cart.push({ menu_id: item.menu_id, name: item.name, price: item.price, quantity: 1, imgUrl: item.imgUrl });
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`✅ ${item.name} 已加入購物車`);
+    alert(`${item.name} 已加入購物車`);
   };
 
   return (
@@ -44,11 +41,7 @@ function OrderPage() {
       <div className="menu-container">
         {menuItems.map((item) => (
           <div className="menu-card" key={item.menu_id}>
-            <img
-              src={item.imgUrl}
-              alt={item.name}
-              className="menu-image"
-            />
+            <img src={item.imgUrl} alt={item.name} className="menu-image" />
             <div className="menu-info">
               <h3>{item.name}</h3>
               <p>價格：{item.price} 元</p>

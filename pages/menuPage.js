@@ -1,6 +1,5 @@
 import { apiBaseUrl } from "../settings.js";
 
-// 建立按鈕元件
 function createButton(text, className, onClick) {
   const btn = document.createElement('button');
   btn.textContent = text;
@@ -9,7 +8,6 @@ function createButton(text, className, onClick) {
   return btn;
 }
 
-// 建立數量控制元件（從 0 開始）
 function createQuantityInput() {
   const quantityBox = document.createElement('div');
   quantityBox.className = 'quantity-input';
@@ -38,18 +36,15 @@ function createQuantityInput() {
   return quantityBox;
 }
 
-// 建立每個商品卡片
 function createMenuCard(item) {
   const card = document.createElement('div');
   card.className = 'menu-card';
 
-  // 商品圖片
   const img = document.createElement('img');
   img.src = item.imgUrl;
   img.alt = item.name;
   img.className = 'menu-image';
 
-  // 商品資訊（品名與價格）
   const info = document.createElement('div');
   info.className = 'menu-info';
 
@@ -63,7 +58,6 @@ function createMenuCard(item) {
   info.appendChild(name);
   info.appendChild(price);
 
-  // 商品操作區（數量＋加入購物車）
   const actions = document.createElement('div');
   actions.className = 'menu-actions';
 
@@ -76,25 +70,21 @@ function createMenuCard(item) {
       alert('請選擇數量');
       return;
     }
-
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const existing = cart.find(i => i.menu_id === item.menu_id);
-
     if (existing) {
       existing.quantity += qty;
     } else {
       cart.push({ ...item, quantity: qty });
     }
-
     localStorage.setItem('cart', JSON.stringify(cart));
     alert(`${item.name} x${qty} 已加入購物車`);
-    input.value = 0; // 清空數量
+    input.value = 0;
   });
 
   actions.appendChild(quantityBox);
   actions.appendChild(addButton);
 
-  // 組合成卡片
   card.appendChild(img);
   card.appendChild(info);
   card.appendChild(actions);
@@ -102,7 +92,6 @@ function createMenuCard(item) {
   return card;
 }
 
-// 主函式：渲染菜單頁面
 export async function renderMenuPage(container) {
   container.innerHTML = '';
 
@@ -115,11 +104,11 @@ export async function renderMenuPage(container) {
   menuArea.className = 'menu-container';
   container.appendChild(menuArea);
 
-  const quantityInputs = []; // 儲存每一項商品的 {item, input}
+  const quantityInputs = [];
 
   try {
-//    const response = await fetch('http://127.0.0.1:5000/public_menus');
-    const response = await fetch(`${apiBaseUrl}/public_menus`);
+    // ✅ GET 使用 query 參數避免預檢
+    const response = await fetch(`${apiBaseUrl}/public_menus?ngrok-skip-browser-warning=true`);
     if (!response.ok) throw new Error('Load failed');
 
     const result = await response.json();
@@ -127,28 +116,22 @@ export async function renderMenuPage(container) {
 
     menu.forEach(item => {
       const card = createMenuCard(item);
-      const input = card.querySelector('input'); // 抓出 input 元件
+      const input = card.querySelector('input');
       menuArea.appendChild(card);
-      quantityInputs.push({ item, input }); // 儲存商品與輸入欄位
+      quantityInputs.push({ item, input });
     });
 
-    // 前往購物車按鈕（會收集所有數量 > 0 的品項）
     const goToCart = createButton('前往購物車', 'next-btn', () => {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
       quantityInputs.forEach(({ item, input }) => {
         const qty = parseInt(input.value);
         if (qty > 0 && !isNaN(qty)) {
           const existing = cart.find(i => i.menu_id === item.menu_id);
-          if (existing) {
-            existing.quantity += qty;
-          } else {
-            cart.push({ ...item, quantity: qty });
-          }
-          input.value = 0; // 清空數量
+          if (existing) existing.quantity += qty;
+          else cart.push({ ...item, quantity: qty });
+          input.value = 0;
         }
       });
-
       localStorage.setItem('cart', JSON.stringify(cart));
       window.location.href = '?page=cart';
     });
@@ -157,7 +140,7 @@ export async function renderMenuPage(container) {
 
   } catch (err) {
     const warning = document.createElement('p');
-    warning.textContent = '⚠️ 無法載入菜單，請稍後再試';
+    warning.textContent = '無法載入菜單，請稍後再試';
     warning.style.color = 'red';
     container.appendChild(warning);
     console.error('Menu load error: ', err);
