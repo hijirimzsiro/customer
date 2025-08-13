@@ -1,54 +1,153 @@
+/* === 基本：維持你的既有配色與桌機版視覺 === */
 body {
   margin: 0;
-  font-family: sans-serif;
-  background-color: #fff9e6; /* ✅ 黃色背景 */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+  background-color: #fff9e6; /* 黃色背景 */
   min-height: 100vh;
-  box-sizing: border-box;
 }
+
+/* 整個頁面的集中區：確保桌機與手機看起來一致 */
+.home-page {
+  padding: 72px 16px 24px;   /* 頂部留空，避免被右上角圖示遮住 */
+}
+
+.home-main {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* 右上角功能列：固定在右上，不佔版面空間 */
+.top-bar {
+  position: fixed;
+  right: 12px;
+  top: 12px;
+  z-index: 100;
+}
+
+.top-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  border: 3px solid #916752; /* 深棕色框線 */
+  background: #f4a261;       /* 橘色 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.icon-btn:hover { filter: brightness(0.95); }
+.icon-svg { width: 22px; height: 22px; fill: #fff; }
 
 /* 標題 */
 .home-title {
-  text-align: center;
+  color: #4b2e1f;
   font-size: 28px;
   font-weight: bold;
-  color: #4b2e1f; /* ✅ 深咖啡色字體 */
-  margin-top: 40px;
+  margin: 28px 0 14px;
 }
 
-/* 按鈕群組區塊 */
+/* 分店選擇（置中） */
+.store-select-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px 12px;
+  margin-bottom: 20px;
+}
+
+.store-label {
+  font-size: 18px;
+  color: #4b2e1f;
+}
+
+.store-select {
+  font-size: 16px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 2px solid #916752;
+  background: #fff;
+  min-width: 200px;
+}
+
+/* 叫號提示卡（有資料才出現） */
+.order-hint-card {
+  max-width: 640px;
+  margin: 8px auto 0;
+  padding: 12px 14px;
+  border: 2px solid #916752;
+  border-radius: 12px;
+  background: #fff;
+  color: #4b2e1f;
+  text-align: center;
+}
+.order-hint-title { font-weight: 800; font-size: 18px; margin-bottom: 8px; }
+.order-hint-sub { font-size: 14px; opacity: .85; margin-top: 6px; }
+
+/* 主行動按鈕 */
 .button-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px; /* ✅ 拉開按鈕間距 */
-  margin-top: 50px;
+  gap: 22px;
+  margin-top: 24px;
 }
 
-/* 單一按鈕樣式 */
-/* 單一按鈕樣式 - 按照範本設計，保留原本橘色 */
 .nav-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-
   height: 60px;
   line-height: 60px;
   text-align: center;
-
-  background-color: #f4a261;          /* ✅ 原本的橘色 */
-  border: 3px solid #916752;          /* ✅ 範本的深棕色框線 */
-  padding: 8px;
-  font-size: 20px;                    /* ✅ 範本的字體大小 */
+  background-color: #f4a261;
+  border: 3px solid #916752;
+  padding: 8px 24px;
+  font-size: 20px;
   font-weight: bold;
-  color: white;                       /* ✅ 原本白字 */
-  border-radius: 15px;                /* ✅ 範本的圓角 */
-  width: 220px;                       /* ✅ 保留原始寬度 */
+  color: #ffffff;
+  border-radius: 15px;
+  width: 220px;
   cursor: pointer;
-  transition: 0.3s;
-  box-shadow: none;                   /* ✅ 範本沒有 box-shadow */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  /* ✅ 範本字型 */
+  transition: 0.2s;
+  box-shadow: none;
+}
+.nav-button:hover { background-color: #e76f51; }
+.nav-button.small {
+  height: 44px;
+  line-height: 44px;
+  font-size: 16px;
+  width: 200px;
 }
 
-.nav-button:hover {
-  background-color: #e76f51;          /* ✅ 原本的 hover 深橘色 */
+/* === 手機優先：維持相同版面，只縮放尺寸與間距 === */
+@media (max-width: 480px) {
+  .home-page { padding: 68px 12px 24px; }
+  .home-main { max-width: 420px; }
+
+  .home-title { font-size: 24px; margin-top: 12px; }
+  .store-label { font-size: 16px; }
+  .store-select { font-size: 16px; min-width: 0; width: 72vw; }
+
+  .order-hint-title { font-size: 16px; }
+  .order-hint-sub { font-size: 13px; }
+
+  .nav-button { width: 72vw; height: 56px; line-height: 56px; font-size: 18px; }
+  .nav-button.small { width: 62vw; height: 44px; line-height: 44px; font-size: 16px; }
+
+  .icon-btn { width: 40px; height: 40px; border-radius: 10px; }
+}
+
+/* 平板：稍放大觸控區 */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .home-main { max-width: 640px; }
+  .nav-button { width: 260px; height: 64px; line-height: 64px; font-size: 22px; }
+  .store-select { font-size: 18px; }
 }
