@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "yaoyaoproject-88907"
-  }
+  },
+  "targets": {
+    "yaoyaoproject-88907": {
+      "hosting": {
+        "customer": [
+          "yaoyao-customer"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

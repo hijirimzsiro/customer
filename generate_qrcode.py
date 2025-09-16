@@ -1,7 +1,8 @@
 import qrcode
 import urllib.parse
 
-base_url = "https://yaoyaoproject-88907.web.app/?store="  # ❗ 不用 page 參數
+base_url = "https://yaoyao-customer.web.app/?page=menu&store="
+
 
 stores = ["台北店", "測試店", "淡水店", "芝山店"]
 
